@@ -38,7 +38,7 @@ This folder contains all the resources needed to train the machine learning mode
 ### **Labels Format**
 
 The labels used in this project follow the **COCO Keypoints format**, which includes bounding box coordinates and keypoints for each object in an image. Below is an example of the label format:
--TODO: add a format example and explain the format.
+- TODO: add a format example and explain the format.
 
 ### **Dependencies**
 
