@@ -1,0 +1,241 @@
+[
+    {
+        "label": "Resistor",
+        "bounding_box": [
+            399,
+            73,
+            431,
+            185
+        ],
+        "connection_points": [
+            [
+                416,
+                68
+            ],
+            [
+                417,
+                180
+            ]
+        ]
+    },
+    {
+        "label": "Resistor",
+        "bounding_box": [
+            261,
+            68,
+            293,
+            190
+        ],
+        "connection_points": [
+            [
+                280,
+                70
+            ],
+            [
+                279,
+                185
+            ]
+        ]
+    },
+    {
+        "label": "GND",
+        "bounding_box": [
+            319,
+            405,
+            379,
+            441
+        ],
+        "connection_points": [
+            [
+                349,
+                406
+            ]
+        ]
+    },
+    {
+        "label": "Resistor",
+        "bounding_box": [
+            261,
+            250,
+            294,
+            372
+        ],
+        "connection_points": [
+            [
+                277,
+                248
+            ],
+            [
+                280,
+                369
+            ]
+        ]
+    },
+    {
+        "label": "Capacitor",
+        "bounding_box": [
+            458,
+            233,
+            526,
+            304
+        ],
+        "connection_points": [
+            [
+                459,
+                268
+            ],
+            [
+                523,
+                267
+            ]
+        ]
+    },
+    {
+        "label": "Voltage_src",
+        "bounding_box": [
+            37,
+            247,
+            104,
+            342
+        ],
+        "connection_points": [
+            [
+                70,
+                341
+            ],
+            [
+                69,
+                248
+            ]
+        ]
+    },
+    {
+        "label": "Resistor",
+        "bounding_box": [
+            402,
+            268,
+            433,
+            376
+        ],
+        "connection_points": [
+            [
+                418,
+                269
+            ],
+            [
+                418,
+                372
+            ]
+        ]
+    },
+    {
+        "label": "Resistor",
+        "bounding_box": [
+            544,
+            284,
+            576,
+            398
+        ],
+        "connection_points": [
+            [
+                563,
+                285
+            ],
+            [
+                563,
+                395
+            ]
+        ]
+    },
+    {
+        "label": "Capacitor",
+        "bounding_box": [
+            198,
+            190,
+            266,
+            257
+        ],
+        "connection_points": [
+            [
+                198,
+                221
+            ],
+            [
+                260,
+                221
+            ]
+        ]
+    },
+    {
+        "label": "Resistor",
+        "bounding_box": [
+            103,
+            206,
+            215,
+            235
+        ],
+        "connection_points": [
+            [
+                107,
+                219
+            ],
+            [
+                209,
+                221
+            ]
+        ]
+    },
+    {
+        "label": "GND",
+        "bounding_box": [
+            40,
+            364,
+            101,
+            406
+        ],
+        "connection_points": [
+            [
+                68,
+                365
+            ]
+        ]
+    },
+    {
+        "label": "GND",
+        "bounding_box": [
+            529,
+            394,
+            590,
+            432
+        ],
+        "connection_points": [
+            [
+                558,
+                392
+            ]
+        ]
+    },
+    {
+        "label": "Transistor_MOSFET",
+        "bounding_box": [
+            381,
+            198,
+            420,
+            255
+        ],
+        "connection_points": [
+            [
+                418,
+                242
+            ],
+            [
+                380,
+                224
+            ],
+            [
+                420,
+                199
+            ]
+        ]
+    }
+]

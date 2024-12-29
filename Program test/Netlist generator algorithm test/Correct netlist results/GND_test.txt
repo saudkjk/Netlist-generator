@@ -1,0 +1,10 @@
+Resistor_1 1 4
+Resistor_2 1 5
+Resistor_3 2 3
+Capacitor_1 3 4
+Voltage_src_1 0 2
+Resistor_4 4 0
+Resistor_5 0 6
+Capacitor_2 6 7
+Resistor_6 0 7
+Transistor_MOSFET_1 5 4 6
