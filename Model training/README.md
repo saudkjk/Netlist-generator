@@ -36,10 +36,14 @@ This folder contains all the resources needed to train the machine learning mode
 3. Open and execute the `Train object_keypoint detection model.ipynb` notebook in your preferred environment (e.g., Google Colab).
  - The notebook will load the dataset, train the model, and save the resulting weights in the *Current trained model** folder.
 
+---
+
 ## **Labels Format**
 
 The labels used in this project follow the **COCO Keypoints format**, which includes bounding box coordinates and keypoints for each object in an image. Below is an example of the label format:
 - TODO: add a format example and explain the format.
+
+---
 
 ## **Dependencies**
 
