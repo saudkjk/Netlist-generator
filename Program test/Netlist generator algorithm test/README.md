@@ -45,12 +45,3 @@ The **Netlist Generator Algorithm Test** folder provides tools and resources to 
    - View the evaluation metrics to assess the accuracy of the Methods.
 
 ---
-
-## **Expected Outputs**
-
-- **Generated Netlists**:
-  - Text files containing the generated netlists are saved in the `Test Results` folder within the `Method` folder.
-- **Comparison Results**:
-  - Metrics comparing the generated netlists with the correct netlists are produced by the `Methods Results Comparator.ipynb` notebook.
-
----
