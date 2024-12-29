@@ -21,7 +21,7 @@ The **Program Test** folder provides tools and scripts to test the functionality
 
 ---
 
-## **Purpose of This Folder**
+## **Purpose**
 
 1. **Testing the Model**:
    - Ensure the trained object-keypoint detection model performs as expected on testing datasets.
