@@ -25,7 +25,7 @@ This folder contains all the resources needed to train the machine learning mode
 - **Purpose**: If your dataset annotations are in CVAT format, use this script to convert them to COCO Keypoints format.
 - **Note**: If you already have labels in the correct COCO format, you can skip this script.
 - **Usage**: Run the script as follows:
-```python .\CVAT_to_cocoKeypoints.py
+```python .\CVAT_to_cocoKeypoints.py```
 
 ### **How to Train the Model**
 
