@@ -16,7 +16,7 @@ Welcome to the **Netlist Generator** repository! This project is designed to con
 - Includes:
   - Datasets used for training.
   - Preprocessing scripts for preparing the data.
-  - Training scripts and configuration files.
+  - Training scripts and training configuration file.
   - Information on the training pipeline and how to retrain or fine-tune the model.
   - Tool to convert CVAT format to coco Keypoints format.
 
