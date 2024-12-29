@@ -29,7 +29,7 @@ By combining these two features, the model provides detailed information about e
 
 ---
 
-## **How to Use This Folder**
+## **How to Use**
 
 1. **Using the Current Model**:
    - Pass the following model path to other programs that use the model for inference:
