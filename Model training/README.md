@@ -29,19 +29,19 @@ This folder contains all the resources needed to train the machine learning mode
 
 ---
 
-### **How to Train the Model**
+## **How to Train the Model**
 
 1. Ensure that your dataset (images and labels) is correctly set up in the `data/` folder.
 2. Configure the paths and parameters in the `config.yaml` file.
 3. Open and execute the `Train object_keypoint detection model.ipynb` notebook in your preferred environment (e.g., Google Colab).
  - The notebook will load the dataset, train the model, and save the resulting weights in the *Current trained model** folder.
 
-### **Labels Format**
+## **Labels Format**
 
 The labels used in this project follow the **COCO Keypoints format**, which includes bounding box coordinates and keypoints for each object in an image. Below is an example of the label format:
 - TODO: add a format example and explain the format.
 
-### **Dependencies**
+## **Dependencies**
 
 To run CVAT_to_cocoKeypoints.py, ensure you have the following:
 - **Python** (version 3.7 or higher)
