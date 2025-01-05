@@ -29,6 +29,13 @@ This folder contains all the resources needed to train the machine learning mode
 
 ---
 
+## **Labels Format**
+
+The labels used in this project follow the **COCO Keypoints format**, which includes bounding box coordinates and keypoints for each object in an image. Below is an example of the label format:
+- TODO: add a format example and explain the format.
+
+---
+
 ## **How to Train the Model**
 
 1. Ensure that your dataset (images and labels) is correctly set up in the `data/` folder.
@@ -38,19 +45,60 @@ This folder contains all the resources needed to train the machine learning mode
 
 ---
 
-## **Labels Format**
+# Steps for installing Ultralytics and Setting Up virtual Environment on Windows
 
-The labels used in this project follow the **COCO Keypoints format**, which includes bounding box coordinates and keypoints for each object in an image. Below is an example of the label format:
-- TODO: add a format example and explain the format.
-
----
-
-## **Dependencies**
-
-To run CVAT_to_cocoKeypoints.py, ensure you have the following:
-- **Python** (version 3.7 or higher)
-- Required libraries (install via `pip install -r requirements.txt` if available):
-- TODO: Add requirements.txt
+## 1) Install Python
+- Download **Python 3.12** (version 3.13 may work, but revert to 3.12 if you encounter issues).
+- [Python Downloads Page](https://www.python.org/downloads/)
 
 ---
+
+## 2) Install PyTorch
+- Go to the PyTorch website (https://pytorch.org/) and select:
+  - **Stable** version
+  - **Windows**
+  - **Pip**
+  - **Python**
+  - **CUDA 12.4** (for NVIDIA GPUs)
+
+- Copy the provided install command, but **don’t run it yet**.
+  Example command:
+  ```bash
+  pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
+
+## 3) Set Up Python Virtual Environment
+
+- Navigate to your project folder.
+
+- Create a new Python virtual environment. Replace `yolo_env` with your preferred name if desired:
+  ```bash
+  py -m venv yolo_env
+
+### Activate the Virtual Environment
+
+To activate the virtual environment, run:
+```bash
+yolo_env\Scripts\activate
+
+**Note:** You’ll know the environment is activated when you see the environment name in parentheses before the command prompt:
+
+```lua
+(yolo_env) C:\your\path\here>
+```
+
+## 4) Upgrade Pip
+- Run the following command to upgrade `pip`:
+  ```bash
+  pip install --upgrade pip
+
+## 5) Install PyTorch
+- Run the previously copied PyTorch installation command:
+  ```bash
+  pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
+
+## 6) Install Ultralytics
+- Install the `ultralytics` package (for YOLOv8):
+  ```bash
+  pip install ultralytics
+
 

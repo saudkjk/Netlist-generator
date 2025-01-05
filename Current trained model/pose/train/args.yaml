@@ -1,7 +1,7 @@
 task: pose
 mode: train
 model: yolov8m-pose.pt
-data: /content/gdrive/My Drive/Netlist Generator/Training/config.yaml
+data: C:\Users\saudk\Desktop\Netlist Generator\Model training/config.yaml
 epochs: 150
 time: null
 patience: 100
@@ -103,4 +103,4 @@ erasing: 0.4
 crop_fraction: 1.0
 cfg: null
 tracker: botsort.yaml
-save_dir: runs/pose/train
+save_dir: C:\Users\saudk\Desktop\Netlist Generator\runs\pose\train
