@@ -1,5 +1,5 @@
 # Ignore Python virtual environment
-yolo_env/
+env_netlist/
 
 runs/
 
