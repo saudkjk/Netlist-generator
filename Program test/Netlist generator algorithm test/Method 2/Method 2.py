@@ -148,6 +148,139 @@ def visualize_connected_regions(masked_edges, labeled_edges, components):
 
     return region_image
 
+# def overlay_and_find_nodes_with_connected_regions(connected_edges, masked_edges, components, test_results_path, image_file, output_files_path):
+#     labeled_edges, num_regions = connected_label(masked_edges)
+
+#     region_to_node = {}
+#     unique_nodes = set()
+#     current_node_id = 1
+
+#     connected_regions = set()
+#     gnd_regions = set()
+#     for component in components:
+#         for point in component["connection_points"]:
+#             px, py = point
+#             if py >= labeled_edges.shape[0] or px >= labeled_edges.shape[1]:
+#                 continue
+
+#             region = labeled_edges[py, px]
+#             if region > 0:
+#                 connected_regions.add(region)
+#                 if component["label"].upper() == "GND":
+#                     gnd_regions.add(region)
+
+#     image_output_folder = os.path.join(output_files_path, os.path.splitext(image_file)[0])
+#     os.makedirs(image_output_folder, exist_ok=True)
+#     region_image_path = os.path.join(image_output_folder, 'region_image.jpg')
+#     region_image = visualize_connected_regions(masked_edges, labeled_edges, components)
+#     cv2.imwrite(region_image_path, region_image)
+    
+#     image_results_file = os.path.join(test_results_path, os.path.splitext(image_file)[0] + '.txt')
+    
+#     with open(image_results_file, 'w') as results_file:
+#         for component in components:
+#             # Skip GND components
+#             if component["label"].upper() == "GND":
+#                 continue
+            
+#             connected_nodes = []
+#             for point in component["connection_points"]:
+#                 px, py = point
+#                 if py >= labeled_edges.shape[0] or px >= labeled_edges.shape[1]:
+#                     continue
+                
+#                 is_connected, connection_point = is_point_connected_or_nearest(masked_edges, px, py)
+#                 if is_connected:
+#                     connected_px, connected_py = connection_point
+#                     region = labeled_edges[connected_py, connected_px]  # Use the connected or nearest edge point
+#                     if region > 0:
+#                         if region not in region_to_node:
+#                             region_to_node[region] = current_node_id
+#                             current_node_id += 1
+#                         node_id = region_to_node[region]
+#                         unique_nodes.add(node_id)
+#                         connected_nodes.append(node_id)
+    
+#             # Ensure we only write components that have at least one connected node
+#             connected_nodes = list(set(connected_nodes))
+#             if connected_nodes:  # Check if there are any connected nodes
+#                 unique_label = component["label"]
+#                 results_file.write(f"{unique_label} {' '.join(map(str, connected_nodes))}\n")
+
+#     image_results_file = os.path.join(test_results_path, os.path.splitext(image_file)[0] + '.txt')
+    
+            
+#     node_image = cv2.cvtColor(connected_edges, cv2.COLOR_GRAY2BGR)
+
+#     # Rearrange node IDs based on top-left-most pixel
+#     region_top_left = {}
+#     for region in range(1, num_regions + 1):
+#         pixels = np.argwhere(labeled_edges == region)  # Get all pixels in the region
+#         if len(pixels) > 0:
+#             top_left_pixel = pixels[np.lexsort((pixels[:, 1], pixels[:, 0]))][0]  # Sort by (y, then x) and pick the first
+#             region_top_left[region] = top_left_pixel
+
+#     # Sort regions by top-left-most pixel
+#     sorted_regions = sorted(region_top_left.items(), key=lambda x: (x[1][0], x[1][1]))  # Sort by (y, x)
+    
+#     # Reassign node IDs
+#     new_region_to_node = {}
+#     new_node_id = 1
+#     for region, _ in sorted_regions:
+#         if region in region_to_node:
+#             new_region_to_node[region] = new_node_id
+#             new_node_id += 1
+
+#     # Update visualization with new IDs
+#     for region, node_id in new_region_to_node.items():
+#         color = (0, 0, 255)  # Blue for newly ordered nodes
+#         mask = labeled_edges == region
+#         node_image[mask] = color
+    
+#     # Draw red dots and label nodes on the image
+#     for region, node_id in new_region_to_node.items():
+#         top_left_pixel = region_top_left[region]
+#         y, x = top_left_pixel
+#         cv2.circle(node_image, (x, y), 7, (0, 0, 255), -1)  # Draw a red dot (BGR: (0, 0, 255))
+#         cv2.putText(node_image, str(node_id), (x, y), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 3, cv2.LINE_AA)  # Black outline
+#         cv2.putText(node_image, str(node_id), (x, y), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 1, cv2.LINE_AA)  # White text
+
+#     # Save the updated image with red dots and labels
+#     labeled_image_path = os.path.join(image_output_folder, 'labeled_nodes_image.jpg')
+#     cv2.imwrite(labeled_image_path, node_image)
+
+#     # Create a new text file for adjusted node positions
+#     adjusted_results_file = os.path.join(test_results_path, os.path.splitext(image_file)[0] + '_adjusted.txt')
+    
+#     with open(adjusted_results_file, 'w') as adjusted_results:
+#         for component in components:
+#             # Skip GND components
+#             if component["label"].upper() == "GND":
+#                 continue
+            
+#             adjusted_connected_nodes = []
+#             for point in component["connection_points"]:
+#                 px, py = point
+#                 if py >= labeled_edges.shape[0] or px >= labeled_edges.shape[1]:
+#                     continue
+                
+#                 is_connected, connection_point = is_point_connected_or_nearest(masked_edges, px, py)
+#                 if is_connected:
+#                     connected_px, connected_py = connection_point
+#                     region = labeled_edges[connected_py, connected_px]  # Use the connected or nearest edge point
+#                     if region > 0 and region in new_region_to_node:
+#                         node_id = new_region_to_node[region]
+#                         adjusted_connected_nodes.append(node_id)
+            
+#             # Ensure we only write components that have at least one connected node
+#             adjusted_connected_nodes = list(set(adjusted_connected_nodes))
+#             if adjusted_connected_nodes:  # Check if there are any connected nodes
+#                 unique_label = component["label"]
+#                 adjusted_results.write(f"{unique_label} {' '.join(map(str, adjusted_connected_nodes))}\n")
+
+#     # Return the original output with updated node IDs
+#     return node_image, len(unique_nodes)
+
 def overlay_and_find_nodes_with_connected_regions(connected_edges, masked_edges, components, test_results_path, image_file, output_files_path):
     labeled_edges, num_regions = connected_label(masked_edges)
 
@@ -175,41 +308,26 @@ def overlay_and_find_nodes_with_connected_regions(connected_edges, masked_edges,
     region_image = visualize_connected_regions(masked_edges, labeled_edges, components)
     cv2.imwrite(region_image_path, region_image)
     
-    image_results_file = os.path.join(test_results_path, os.path.splitext(image_file)[0] + '.txt')
-    
-    with open(image_results_file, 'w') as results_file:
-        for component in components:
-            # Skip GND components
-            if component["label"].upper() == "GND":
+    for component in components:
+        # Skip GND components
+        if component["label"].upper() == "GND":
+            continue
+        
+        for point in component["connection_points"]:
+            px, py = point
+            if py >= labeled_edges.shape[0] or px >= labeled_edges.shape[1]:
                 continue
             
-            connected_nodes = []
-            for point in component["connection_points"]:
-                px, py = point
-                if py >= labeled_edges.shape[0] or px >= labeled_edges.shape[1]:
-                    continue
-                
-                is_connected, connection_point = is_point_connected_or_nearest(masked_edges, px, py)
-                if is_connected:
-                    connected_px, connected_py = connection_point
-                    region = labeled_edges[connected_py, connected_px]  # Use the connected or nearest edge point
-                    if region > 0:
-                        if region not in region_to_node:
-                            region_to_node[region] = current_node_id
-                            current_node_id += 1
-                        node_id = region_to_node[region]
-                        unique_nodes.add(node_id)
-                        connected_nodes.append(node_id)
-    
-            # Ensure we only write components that have at least one connected node
-            connected_nodes = list(set(connected_nodes))
-            if connected_nodes:  # Check if there are any connected nodes
-                unique_label = component["label"]
-                results_file.write(f"{unique_label} {' '.join(map(str, connected_nodes))}\n")
+            is_connected, connection_point = is_point_connected_or_nearest(masked_edges, px, py)
+            if is_connected:
+                connected_px, connected_py = connection_point
+                region = labeled_edges[connected_py, connected_px]  # Use the connected or nearest edge point
+                if region > 0:
+                    if region not in region_to_node:
+                        region_to_node[region] = current_node_id
+                        current_node_id += 1
+                    node_id = region_to_node[region]
 
-    image_results_file = os.path.join(test_results_path, os.path.splitext(image_file)[0] + '.txt')
-    
-            
     node_image = cv2.cvtColor(connected_edges, cv2.COLOR_GRAY2BGR)
 
     # Rearrange node IDs based on top-left-most pixel
@@ -249,16 +367,16 @@ def overlay_and_find_nodes_with_connected_regions(connected_edges, masked_edges,
     labeled_image_path = os.path.join(image_output_folder, 'labeled_nodes_image.jpg')
     cv2.imwrite(labeled_image_path, node_image)
 
-    # Create a new text file for adjusted node positions
-    adjusted_results_file = os.path.join(test_results_path, os.path.splitext(image_file)[0] + '_adjusted.txt')
+    # Create a new text file for node positions
+    results_file = os.path.join(test_results_path, os.path.splitext(image_file)[0] + '.txt')
     
-    with open(adjusted_results_file, 'w') as adjusted_results:
+    with open(results_file, 'w') as results:
         for component in components:
             # Skip GND components
             if component["label"].upper() == "GND":
                 continue
             
-            adjusted_connected_nodes = []
+            connected_nodes = []
             for point in component["connection_points"]:
                 px, py = point
                 if py >= labeled_edges.shape[0] or px >= labeled_edges.shape[1]:
@@ -270,13 +388,13 @@ def overlay_and_find_nodes_with_connected_regions(connected_edges, masked_edges,
                     region = labeled_edges[connected_py, connected_px]  # Use the connected or nearest edge point
                     if region > 0 and region in new_region_to_node:
                         node_id = new_region_to_node[region]
-                        adjusted_connected_nodes.append(node_id)
+                        connected_nodes.append(node_id)
             
             # Ensure we only write components that have at least one connected node
-            adjusted_connected_nodes = list(set(adjusted_connected_nodes))
-            if adjusted_connected_nodes:  # Check if there are any connected nodes
+            connected_nodes = list(set(connected_nodes))
+            if connected_nodes:  # Check if there are any connected nodes
                 unique_label = component["label"]
-                adjusted_results.write(f"{unique_label} {' '.join(map(str, adjusted_connected_nodes))}\n")
+                results.write(f"{unique_label} {' '.join(map(str, connected_nodes))}\n")
 
     # Return the original output with updated node IDs
     return node_image, len(unique_nodes)
@@ -358,3 +476,7 @@ if __name__ == '__main__':
     test_results_path = os.path.join(parent_dir, 'Method 2/Test results/')
 
     process_all_images(test_images_folder, latest_train_path, output_files_path, test_results_path)
+
+
+
+
