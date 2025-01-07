@@ -28,19 +28,11 @@ def mask_components(connected_edges, components):
     for component in components:
         bbox = component["bounding_box"]
         x1, y1, x2, y2 = bbox
-        width = x2 - x1
-        height = y2 - y1
-        shrink_x = 12 if width >= height else 5
-        shrink_y = 12 if height >= width else 5
-        shrink_x1 = max(x1 + shrink_x, 0)
-        shrink_y1 = max(y1 + shrink_y, 0)
-        shrink_x2 = max(x2 - shrink_x, 0)
-        shrink_y2 = max(y2 - shrink_y, 0)
-        cv2.rectangle(masked_edges, (shrink_x1, shrink_y1), (shrink_x2, shrink_y2), 0, -1)
+        cv2.rectangle(masked_edges, (x1, y1), (x2, y2), 0, -1)
 
     return masked_edges
 
-def draw_detected_components(image_path, components):
+def annotate_image(image_path, components, image_output_folder):
     image = cv2.imread(image_path, cv2.IMREAD_COLOR)
     for component in components:
         label = component["label"]
@@ -50,8 +42,8 @@ def draw_detected_components(image_path, components):
         keypoints = component["connection_points"]
         for point in keypoints:
             cv2.circle(image, (point[0], point[1]), 5, (255, 0, 0), -1)
-
-    return image
+    model_annotation_path = os.path.join(image_output_folder, 'model_annotation.jpg')
+    cv2.imwrite(model_annotation_path, image)
 
 def is_point_connected(masked_edges, px, py, kernel_size=3):
     half_size = kernel_size // 2
@@ -91,11 +83,6 @@ def is_point_connected_or_nearest(masked_edges, px, py, kernel_size=3):
     return False, None  # No connection and no nearest edge
 
 def visualize_connected_regions(masked_edges, labeled_edges, components):
-    """
-    Visualize regions that are connected to electrical components.
-    Ground node regions are highlighted with white color, and other regions are given unique colors.
-    Each region is also labeled with its ID for easy distinction.
-    """
     # Get unique regions
     unique_regions = np.unique(labeled_edges)
     
@@ -113,16 +100,17 @@ def visualize_connected_regions(masked_edges, labeled_edges, components):
     for component in components:
         for point in component["connection_points"]:
             px, py = point
-            if py >= labeled_edges.shape[0] or px >= labeled_edges.shape[1]:
-                continue  # Out of bounds
+            # Use is_point_connected_or_nearest to check connection
+            connected, nearest_point = is_point_connected_or_nearest(masked_edges, px, py)
+            if connected and nearest_point is not None:
+                nearest_px, nearest_py = nearest_point
+                region = labeled_edges[nearest_py, nearest_px]
+                if region > 0:  # Ignore the background
+                    connected_regions.add(region)
 
-            region = labeled_edges[py, px]
-            if region > 0:  # Ignore the background
-                connected_regions.add(region)
-
-                # Mark ground regions
-                if component["label"].upper() == "GND":
-                    gnd_regions.add(region)
+                    # Mark ground regions
+                    if component["label"].upper() == "GND":
+                        gnd_regions.add(region)
 
     # Highlight regions with electrical connections
     for region_index, region_id in enumerate(connected_regions):
@@ -151,8 +139,24 @@ def visualize_connected_regions(masked_edges, labeled_edges, components):
 def overlay_and_find_nodes_with_connected_regions(connected_edges, masked_edges, components, test_results_path, image_file, output_files_path):
     labeled_edges, num_regions = connected_label(masked_edges)
 
+    # Convert connected_edges to a color image for visualization
+    after_labeling_regions = cv2.cvtColor(connected_edges, cv2.COLOR_GRAY2BGR)
+
+    # Update visualization with new IDs
+    for region in range(1, num_regions + 1):  # Iterate over all labeled regions
+        color = (0, 0, 255)  # Red for labeled regions
+        mask = labeled_edges == region  # Create a mask for the current region
+        after_labeling_regions[mask] = color  # Apply the color to the mask
+
+    # Ensure the output folder exists
+    image_output_folder = os.path.join(output_files_path, os.path.splitext(image_file)[0])
+    os.makedirs(image_output_folder, exist_ok=True)
+
+    # Save the labeled image
+    after_labeling_regions_path = os.path.join(image_output_folder, 'after_labeling_regions.jpg')
+    cv2.imwrite(after_labeling_regions_path, after_labeling_regions)
+
     region_to_node = {}
-    unique_nodes = set()
     current_node_id = 1
 
     connected_regions = set()
@@ -171,7 +175,7 @@ def overlay_and_find_nodes_with_connected_regions(connected_edges, masked_edges,
 
     image_output_folder = os.path.join(output_files_path, os.path.splitext(image_file)[0])
     os.makedirs(image_output_folder, exist_ok=True)
-    region_image_path = os.path.join(image_output_folder, 'region_image.jpg')
+    region_image_path = os.path.join(image_output_folder, 'numbered_nodes.jpg')
     region_image = visualize_connected_regions(masked_edges, labeled_edges, components)
     cv2.imwrite(region_image_path, region_image)
     
@@ -221,22 +225,36 @@ def overlay_and_find_nodes_with_connected_regions(connected_edges, masked_edges,
         color = (0, 0, 255)  # Blue for newly ordered nodes
         mask = labeled_edges == region
         node_image[mask] = color
-    
-    # Draw red dots and label nodes on the image
+
+    top_left_most_pixel_image = node_image.copy()
+    connections = node_image.copy()
+
+    # Draw blue dots and label nodes on the image
     for region, node_id in new_region_to_node.items():
         top_left_pixel = region_top_left[region]
         y, x = top_left_pixel
-        cv2.circle(node_image, (x, y), 7, (0, 0, 255), -1)  # Draw a red dot (BGR: (0, 0, 255))
-        cv2.putText(node_image, str(node_id), (x, y), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 3, cv2.LINE_AA)  # Black outline
-        cv2.putText(node_image, str(node_id), (x, y), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 1, cv2.LINE_AA)  # White text
+        cv2.circle(top_left_most_pixel_image, (x, y), 7, (255, 0, 0), -1)  # Draw a red dot (BGR: (0, 0, 255))
+        cv2.putText(top_left_most_pixel_image, str(node_id), (x, y), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 3, cv2.LINE_AA)  # Black outline
+        cv2.putText(top_left_most_pixel_image, str(node_id), (x, y), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 1, cv2.LINE_AA)  # White text
+    top_left_most_pixel_path = os.path.join(image_output_folder, 'top_left_most_pixel.jpg')
+    cv2.imwrite(top_left_most_pixel_path, top_left_most_pixel_image)
 
-    # Save the updated image with red dots and labels
-    labeled_image_path = os.path.join(image_output_folder, 'labeled_nodes_image.jpg')
-    cv2.imwrite(labeled_image_path, node_image)
+    for component in components:
+        for point in component["connection_points"]:
+            px, py = point
+            if py >= labeled_edges.shape[0] or px >= labeled_edges.shape[1]:
+                continue
+
+            is_connected, connection_point = is_point_connected_or_nearest(masked_edges, px, py)
+            if is_connected:
+                connected_px, connected_py = connection_point
+                # Draw a dot at the connection point
+                cv2.circle(connections, (connected_px, connected_py), 5, (0, 255, 0), -1)  # Green dots (BGR: (0, 255, 0))
+    connections_path = os.path.join(image_output_folder, 'connections.jpg')
+    cv2.imwrite(connections_path, connections)
 
     # Create a new text file for node positions
     results_file = os.path.join(test_results_path, os.path.splitext(image_file)[0] + '.txt')
-    
     with open(results_file, 'w') as results:
         # Dictionary to keep track of label counts
         label_counts = {}
@@ -276,9 +294,6 @@ def overlay_and_find_nodes_with_connected_regions(connected_edges, masked_edges,
                 # Write to the results file
                 results.write(f"{numbered_label} {' '.join(map(str, connected_nodes))}\n")
 
-    # Return the original output with updated node IDs
-    return node_image, len(unique_nodes)
-
 def process_all_images(test_images_folder, model_path, output_files_path, test_results_path):
     os.makedirs(output_files_path, exist_ok=True)
     os.makedirs(test_results_path, exist_ok=True)
@@ -293,8 +308,6 @@ def process_all_images(test_images_folder, model_path, output_files_path, test_r
         os.makedirs(image_output_folder, exist_ok=True)
 
         json_path = os.path.join(image_output_folder, 'circuit_info.json')
-        annotated_image_path = os.path.join(image_output_folder, 'annotated.jpg')
-        node_image_path = os.path.join(image_output_folder, 'nodes.jpg')
 
         results = model(image_path)[0]
         circuit_info = []
@@ -322,14 +335,11 @@ def process_all_images(test_images_folder, model_path, output_files_path, test_r
         with open(json_path, 'w') as json_file:
             json.dump(circuit_info, json_file, indent=4)
 
-        annotated_image = draw_detected_components(image_path, circuit_info)
+        annotate_image(image_path, circuit_info, image_output_folder) # for testing model resutls
         connected_edges, components = visualize_everything_connected(image_path, json_path)
         masked_edges = mask_components(connected_edges, components)
-        node_image, num_nodes = overlay_and_find_nodes_with_connected_regions(
+        overlay_and_find_nodes_with_connected_regions(
             connected_edges, masked_edges, components, test_results_path, image_file, output_files_path)
-
-        cv2.imwrite(annotated_image_path, annotated_image)
-        cv2.imwrite(node_image_path, node_image)
 
 if __name__ == '__main__':
     parent_dir = os.path.dirname(os.getcwd()) # Parent directory

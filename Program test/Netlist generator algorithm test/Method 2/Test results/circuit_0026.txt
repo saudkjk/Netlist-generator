@@ -1,8 +1,8 @@
-Transistor_BJT_1 2 4 6
+Transistor_BJT_1 3 4 6
 Resistor_1 6 7
 Resistor_2 1 4
-Resistor_3 1 2
-Resistor_4 3 7
+Resistor_3 3
+Resistor_4 2 7
 Resistor_5 4 7
 Capacitor_1 6 7
 Capacitor_2 4 5
