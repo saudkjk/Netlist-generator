@@ -1,0 +1,9 @@
+# Ignore Python virtual environment
+yolo_env/
+
+# Optional: Ignore other common Python-related files
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
