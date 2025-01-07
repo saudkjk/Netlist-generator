@@ -1,0 +1,63 @@
+[
+    {
+        "label": "Resistor",
+        "bounding_box": [
+            60,
+            367,
+            101,
+            511
+        ],
+        "connection_points": [
+            [
+                79,
+                364
+            ],
+            [
+                82,
+                507
+            ]
+        ]
+    },
+    {
+        "label": "Transistor_BJT",
+        "bounding_box": [
+            121,
+            249,
+            223,
+            391
+        ],
+        "connection_points": [
+            [
+                213,
+                389
+            ],
+            [
+                127,
+                321
+            ],
+            [
+                212,
+                255
+            ]
+        ]
+    },
+    {
+        "label": "Resistor",
+        "bounding_box": [
+            60,
+            134,
+            101,
+            270
+        ],
+        "connection_points": [
+            [
+                80,
+                130
+            ],
+            [
+                81,
+                268
+            ]
+        ]
+    }
+]

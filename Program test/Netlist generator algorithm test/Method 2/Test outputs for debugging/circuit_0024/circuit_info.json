@@ -1,0 +1,132 @@
+[
+    {
+        "label": "Transistor_BJT",
+        "bounding_box": [
+            135,
+            418,
+            203,
+            512
+        ],
+        "connection_points": [
+            [
+                199,
+                512
+            ],
+            [
+                134,
+                465
+            ],
+            [
+                199,
+                415
+            ]
+        ]
+    },
+    {
+        "label": "Transistor_BJT",
+        "bounding_box": [
+            134,
+            256,
+            204,
+            346
+        ],
+        "connection_points": [
+            [
+                199,
+                253
+            ],
+            [
+                131,
+                299
+            ],
+            [
+                199,
+                347
+            ]
+        ]
+    },
+    {
+        "label": "Transistor_BJT",
+        "bounding_box": [
+            81,
+            336,
+            149,
+            430
+        ],
+        "connection_points": [
+            [
+                84,
+                434
+            ],
+            [
+                146,
+                387
+            ],
+            [
+                84,
+                335
+            ]
+        ]
+    },
+    {
+        "label": "Resistor",
+        "bounding_box": [
+            74,
+            472,
+            101,
+            570
+        ],
+        "connection_points": [
+            [
+                87,
+                476
+            ],
+            [
+                87,
+                569
+            ]
+        ]
+    },
+    {
+        "label": "Transistor_BJT",
+        "bounding_box": [
+            83,
+            172,
+            148,
+            262
+        ],
+        "connection_points": [
+            [
+                82,
+                168
+            ],
+            [
+                147,
+                216
+            ],
+            [
+                83,
+                264
+            ]
+        ]
+    },
+    {
+        "label": "Resistor",
+        "bounding_box": [
+            183,
+            118,
+            210,
+            217
+        ],
+        "connection_points": [
+            [
+                195,
+                121
+            ],
+            [
+                196,
+                215
+            ]
+        ]
+    }
+]
