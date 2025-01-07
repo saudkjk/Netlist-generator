@@ -237,7 +237,35 @@ def overlay_and_find_nodes_with_connected_regions(connected_edges, masked_edges,
     # Create a new text file for node positions
     results_file = os.path.join(test_results_path, os.path.splitext(image_file)[0] + '.txt')
     
+    # with open(results_file, 'w') as results:
+    #     for component in components:
+    #         # Skip GND components
+    #         if component["label"].upper() == "GND":
+    #             continue
+            
+    #         connected_nodes = []
+    #         for point in component["connection_points"]:
+    #             px, py = point
+    #             if py >= labeled_edges.shape[0] or px >= labeled_edges.shape[1]:
+    #                 continue
+                
+    #             is_connected, connection_point = is_point_connected_or_nearest(masked_edges, px, py)
+    #             if is_connected:
+    #                 connected_px, connected_py = connection_point
+    #                 region = labeled_edges[connected_py, connected_px]  # Use the connected or nearest edge point
+    #                 if region > 0 and region in new_region_to_node:
+    #                     node_id = new_region_to_node[region]
+    #                     connected_nodes.append(node_id)
+            
+    #         # Ensure we only write components that have at least one connected node
+    #         connected_nodes = list(set(connected_nodes))
+    #         if connected_nodes:  # Check if there are any connected nodes
+    #             unique_label = component["label"]
+    #             results.write(f"{unique_label} {' '.join(map(str, connected_nodes))}\n")
     with open(results_file, 'w') as results:
+        # Dictionary to keep track of label counts
+        label_counts = {}
+
         for component in components:
             # Skip GND components
             if component["label"].upper() == "GND":
@@ -261,7 +289,17 @@ def overlay_and_find_nodes_with_connected_regions(connected_edges, masked_edges,
             connected_nodes = list(set(connected_nodes))
             if connected_nodes:  # Check if there are any connected nodes
                 unique_label = component["label"]
-                results.write(f"{unique_label} {' '.join(map(str, connected_nodes))}\n")
+                
+                # Increment the count for the current label
+                if unique_label not in label_counts:
+                    label_counts[unique_label] = 0
+                label_counts[unique_label] += 1
+                
+                # Create a new label with numbering
+                numbered_label = f"{unique_label}_{label_counts[unique_label]}"
+                
+                # Write to the results file
+                results.write(f"{numbered_label} {' '.join(map(str, connected_nodes))}\n")
 
     # Return the original output with updated node IDs
     return node_image, len(unique_nodes)
@@ -343,7 +381,3 @@ if __name__ == '__main__':
     test_results_path = os.path.join(parent_dir, 'Method 2/Test results/')
 
     process_all_images(test_images_folder, latest_train_path, output_files_path, test_results_path)
-
-
-
-
