@@ -1,0 +1,18 @@
+# Data
+path: C:/Users/saudk/Desktop/Netlist Generator/Model training/data
+train: images/train # train images (relative to 'path')
+val: images/val # val images (relative to 'path')
+
+# Keypoints
+kpt_shape: [3, 3] # [number of keypoints, number of dim]
+
+# Classes
+names:
+    0: Resistor
+    1: Capacitor
+    2: Inductor
+    3: Transistor_BJT
+    4: Transistor_MOSFET
+    5: Voltage_src
+    6: Current_src
+    7: GND
