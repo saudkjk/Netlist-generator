@@ -1,11 +1,16 @@
 # Ignore Python virtual environment
 env_netlist/
 
-runs/
-
 # Optional: Ignore other common Python-related files
 __pycache__/
 *.py[cod]
 *.egg-info/
 dist/
 build/
+
+# other
+# config is now dynamicllay generated
+/Model training/config.yaml
+# Ignore model checkpoints
+runs/
+
