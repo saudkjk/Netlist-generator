@@ -15,7 +15,7 @@ train: images/train # train images (relative to 'path')
 val: images/val # val images (relative to 'path')
 """
     # Static sections of the config
-    static_section = """# Keypoints
+    static_section = """\n# Keypoints
 kpt_shape: [3, 3] # [number of keypoints, number of dim]
 
 # Classes
