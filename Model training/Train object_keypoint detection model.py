@@ -1,27 +1,22 @@
 import os
 import shutil
 from ultralytics import YOLO
-# from config import PROJECT_PATH 
-
-current_dir = os.getcwd()  # Get the current working directory
-PROJECT_PATH = os.path.dirname(current_dir)  # Get the parent directory (project root directory)
-
-# Define source and destination paths dynamically
-source_path = os.path.join(PROJECT_PATH, 'runs')
-destination_path = os.path.join(PROJECT_PATH, 'Current trained model')
-
-from ultralytics import YOLO
+from prepare_config import prepare_config_file, prepare_paths
 
 def main():
-    # Load and train the YOLO model
+    # Step 1: Prepare configuration file and paths
+    config_path, project_path = prepare_config_file()
+    source_path, destination_path = prepare_paths(project_path)
+
+    # Step 2: Load and train the YOLO model
     model = YOLO('yolov8m-pose.pt')
     model.train(
-        data=os.path.join(PROJECT_PATH, 'Model training/config.yaml'),
-        epochs=150,
+        data=config_path,  # Use the prepared config file
+        epochs=5,
         imgsz=640
     )
     
-    # Copy the 'runs' directory (YOLO training output) to the specified destination
+    # Step 3: Copy the 'runs' directory (YOLO training output) to the specified destination
     if os.path.exists(source_path):
         shutil.copytree(source_path, destination_path, dirs_exist_ok=True)
         print(f"Training results have been copied to {destination_path}")
