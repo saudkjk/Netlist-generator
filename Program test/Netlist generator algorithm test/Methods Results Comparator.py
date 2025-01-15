@@ -27,43 +27,6 @@ def compare_netlists(ground_truth, test_netlist):
     node_mapping = {}  # Tracks current mapping from test nodes to ground truth nodes
     used_components = set()  # Tracks test components that are already matched
 
-    def is_equivalent(ground_truth_component, test_component, locked_nodes, node_mapping):
-        """
-        Check if two components are equivalent considering node mappings.
-        """
-        ground_truth_nodes = ground_truth_component.nodes
-        test_nodes = apply_mapping(test_component.nodes, node_mapping)
-
-        for i in range(len(ground_truth_nodes)):
-            ground_truth_node = ground_truth_nodes[i]
-            test_node = test_nodes[i]
-
-            # Check locked nodes
-            if ground_truth_node in locked_nodes and locked_nodes[ground_truth_node] != test_node:
-                print(f"Node {ground_truth_node} is locked to {locked_nodes[ground_truth_node]}, but {test_node} found.")
-                return False
-
-            # Check node mapping
-            if ground_truth_node in node_mapping:
-                if node_mapping[ground_truth_node] != test_node:
-                    print(f"Conflict in node mapping: {ground_truth_node} -> {node_mapping[ground_truth_node]} vs {test_node}.")
-                    return False
-
-            # Check for conflicting test node reuse
-            if test_node in node_mapping.values() and not any(
-                ground_truth_node == k and test_node == v for k, v in node_mapping.items()
-            ):
-                print(f"Test node {test_node} is already mapped to another ground node.")
-                return False
-
-        return True
-
-    def apply_mapping(nodes, node_mapping):
-        """
-        Apply the current mapping to a list of nodes.
-        """
-        return [node_mapping.get(node, node) for node in nodes]
-
     def backtrack(ground_truth_index, current_mapping, locked_nodes):
         """
         Recursive function to match ground truth components with test components.
@@ -474,15 +437,15 @@ def main():
         # Compare netlists file by file
         for file_name in ground_truth_files:
             if file_name in test_netlist_files:
-                print(f"Comparing: {file_name}")
+                print(f"\nComparing: {file_name}\n")
                 ground_truth = ground_truth_files[file_name]
                 test_netlist = test_netlist_files[file_name]
                 print(f"Ground Truth: {ground_truth}")
                 print(f"Test Netlist: {test_netlist}")
                 result = compare_netlists(ground_truth, test_netlist)
-                print(f"Match Result for {file_name}: {result}")
+                print(f"\nMatch Result for {file_name}: {result}\n")
             else:
-                print(f"Test netlist file missing for {file_name}")
+                print(f"\nTest netlist file missing for {file_name}\n")
 
     else:
         print("Invalid choice. Please select 1, 2, 3, or 4.")
