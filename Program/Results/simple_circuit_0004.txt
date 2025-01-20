@@ -1,0 +1,9 @@
+Voltage_src_1 3 6
+Resistor_1 2 7
+Resistor_2 8 5
+Resistor_3 2 7
+Resistor_4 1 2
+Resistor_5 1 2
+Capacitor_1 2 5
+Capacitor_2 2 4
+Resistor_6 3 4
