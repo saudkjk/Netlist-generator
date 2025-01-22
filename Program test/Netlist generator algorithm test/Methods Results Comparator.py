@@ -142,8 +142,8 @@ def parse_netlist(file_content):
         for node in connections:
             node_to_components[node].append(component)
 
-    print(f"Parsed components to nodes: {component_to_nodes}")  # Debug: Components and nodes
-    print(f"Parsed nodes to components: {node_to_components}")  # Debug: Nodes and their associated components
+    # print(f"Parsed components to nodes: {component_to_nodes}")  # Debug: Components and nodes
+    # print(f"Parsed nodes to components: {node_to_components}")  # Debug: Nodes and their associated components
 
     return component_to_nodes, node_to_components
 
@@ -171,9 +171,9 @@ def process_netlist_files(folder_path, true_netlist_dir, filename):
     true_file_path = os.path.join(true_netlist_dir, filename)
 
     if not os.path.exists(true_file_path):
-        print(f"Skipping {filename}: True file not found.")
+        print(f"\nSkipping {filename}: True file not found.")
         return None, None
-
+    print(f"\nProcessing {filename}...")
     # Read the netlist files
     with open(true_file_path) as f:
         true_netlist_content = f.read()
@@ -313,7 +313,7 @@ def test_method_on_all_netlists(test_netlists_path):
     true_netlist_dir = os.path.join(current_dir, 'True netlists/')
 
     print("Processing Method 2...")
-    total_matched_nodes, total_true_nodes, total_generated_nodes, num_files = process_folder(test_netlists_path, true_netlist_dir)
+    total_matched_nodes, total_true_nodes, total_generated_nodes, num_files = process_folder(test_netlists_path, true_netlist_dir, False)
 
     # Calculate false nodes
     total_false_nodes = total_generated_nodes - total_matched_nodes
@@ -435,8 +435,9 @@ def main():
         test_netlist_files = process_the_folder(method_2_netlist_path)
 
         # Compare netlists file by file
-        for file_name in true_netlist_files:
-            if file_name in test_netlist_files:
+        missing_files = set()
+        for file_name in test_netlist_files:
+            if file_name in true_netlist_files:
                 print(f"\nComparing: {file_name}\n")
                 true_netlist = true_netlist_files[file_name]
                 test_netlist = test_netlist_files[file_name]
@@ -445,7 +446,10 @@ def main():
                 result = compare_netlists(true_netlist, test_netlist)
                 print(f"\nMatch Result for {file_name}: {result}\n")
             else:
-                print(f"\nTest netlist file missing for {file_name}\n")
+                missing_files.add(file_name)
+        
+        for file_name in missing_files:
+            print(f"\nTrue netlist file missing for {file_name}\n")
 
     else:
         print("Invalid choice. Please select 1, 2, 3, or 4.")
