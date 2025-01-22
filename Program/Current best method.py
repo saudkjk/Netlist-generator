@@ -47,6 +47,7 @@ def overlay_and_find_nodes_with_connected_regions(masked_edges, components, resu
     labeled_edges, num_regions = connected_label(masked_edges)
     region_to_node = {}
     current_node_id = 1
+    gnd_regions = set()
 
     for component in components:
         for point in component["connection_points"]:
@@ -62,6 +63,8 @@ def overlay_and_find_nodes_with_connected_regions(masked_edges, components, resu
                     if region not in region_to_node:
                         region_to_node[region] = current_node_id
                         current_node_id += 1
+                    if component["label"].upper() == "GND":
+                        gnd_regions.add(region)
 
     # Rearrange node IDs based on top-left-most pixel
     region_top_left = {}
@@ -81,6 +84,17 @@ def overlay_and_find_nodes_with_connected_regions(masked_edges, components, resu
         if region in region_to_node:
             new_region_to_node[region] = new_node_id
             new_node_id += 1
+    
+    # Adjust for gnd_regions
+    gnd_nodes = [new_region_to_node[region] for region in gnd_regions if region in new_region_to_node]
+    if gnd_nodes:  # If there are any ground nodes
+        # Find the smallest node in gnd_nodes
+        smallest_gnd_node = min(gnd_nodes)
+        
+        # Update new_region_to_node so that all gnd_regions point to the smallest_gnd_node
+        for region in gnd_regions:
+            if region in new_region_to_node:
+                new_region_to_node[region] = smallest_gnd_node
 
     # Create a new text file for node positions
     results_file = os.path.join(results_path, os.path.splitext(image_file)[0] + '.txt')
