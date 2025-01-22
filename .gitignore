@@ -14,3 +14,9 @@ build/
 # Ignore model checkpoints
 runs/
 
+/Program/Results
+/Program test/Model test/Model test results
+/Program test/Netlist generator algorithm test/Method 1/Test outputs for debugging
+/Program test/Netlist generator algorithm test/Method 1/Test results
+/Program test/Netlist generator algorithm test/Method 2/Test outputs for debugging
+/Program test/Netlist generator algorithm test/Method 2/Test results
