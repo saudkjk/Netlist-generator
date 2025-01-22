@@ -1,0 +1,5 @@
+Voltage_src_1 3 4
+Voltage_src_2 2 4
+Capacitor_1 1 4
+Inductor_1 1 2
+Inductor_2 1 3

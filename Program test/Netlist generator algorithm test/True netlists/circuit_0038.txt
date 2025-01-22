@@ -1,0 +1,5 @@
+Capacitor_1 2 4
+Capacitor_2 1 4
+Capacitor_3 1 2
+Capacitor_4 1 3
+Capacitor_5 3 4
