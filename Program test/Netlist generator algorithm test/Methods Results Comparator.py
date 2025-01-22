@@ -36,17 +36,17 @@ def compare_netlists(true_netlist, test_netlist):
             return True
 
         true_netlist_component = true_netlist[true_netlist_index]
-        print(f"\nProcessing true netlist component: {true_netlist_component}")
+        # print(f"\nProcessing true netlist component: {true_netlist_component}")
 
         # Step 1: Check for set matches
         for test_component in test_netlist:
             if test_component in used_components:
                 continue  # Skip already used test components
 
-            print(f"Checking set match for test component: {test_component}")
+            # print(f"Checking set match for test component: {test_component}")
 
             if is_set_match(true_netlist_component, test_component):
-                print(f"Set match found: {true_netlist_component} == {test_component}")
+                # print(f"Set match found: {true_netlist_component} == {test_component}")
                 # Mark as used
                 used_components.add(test_component)
 
@@ -61,7 +61,7 @@ def compare_netlists(true_netlist, test_netlist):
                     return True
 
                 # Revert changes if this path fails
-                print(f"Backtracking from set match: {true_netlist_component} and {test_component}")
+                # print(f"Backtracking from set match: {true_netlist_component} and {test_component}")
                 current_mapping = original_mapping
                 used_components.remove(test_component)
 
@@ -70,10 +70,10 @@ def compare_netlists(true_netlist, test_netlist):
             if test_component in used_components:
                 continue  # Skip already used test components
 
-            print(f"Attempting dynamic mapping for test component: {test_component}")
+            # print(f"Attempting dynamic mapping for test component: {test_component}")
 
             if len(test_component.nodes) != len(true_netlist_component.nodes):
-                print(f"Skipping {test_component}: Node count mismatch with {true_netlist_component}")
+                # print(f"Skipping {test_component}: Node count mismatch with {true_netlist_component}")
                 continue  # Skip components with mismatched node counts
 
             # Assume this test component matches (attempt dynamic mapping)
@@ -88,7 +88,7 @@ def compare_netlists(true_netlist, test_netlist):
 
                 if true_netlist_node in locked_nodes:
                     if locked_nodes[true_netlist_node] != test_node:
-                        print(f"Conflict in locked nodes: {true_netlist_node} -> {locked_nodes[true_netlist_node]} vs {test_node}")
+                        # print(f"Conflict in locked nodes: {true_netlist_node} -> {locked_nodes[true_netlist_node]} vs {test_node}")
                         valid_mapping = False
                         break  # Inconsistent mapping, skip this match
 
@@ -96,20 +96,20 @@ def compare_netlists(true_netlist, test_netlist):
                     current_mapping[true_netlist_node] = test_node
 
             if valid_mapping:
-                print(f"Dynamic mapping successful: {true_netlist_component} -> {test_component}")
+                # print(f"Dynamic mapping successful: {true_netlist_component} -> {test_component}")
                 # Recursive call to match the next component
                 if backtrack(true_netlist_index + 1, current_mapping, locked_nodes):
                     return True
 
             # Revert changes if this path fails
-            print(f"Backtracking from dynamic mapping: {true_netlist_component} and {test_component}")
+            # print(f"Backtracking from dynamic mapping: {true_netlist_component} and {test_component}")
             current_mapping = original_mapping
             used_components.remove(test_component)
 
         return False  # No valid mapping found
 
     # Main comparison loop
-    print("\nStarting netlist comparison...")
+    # print("\nStarting netlist comparison...")
     return backtrack(0, node_mapping, locked_nodes)
 
 
