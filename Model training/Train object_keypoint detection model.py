@@ -12,7 +12,7 @@ def main():
     model = YOLO('yolov8m-pose.pt')
     model.train(
         data=config_path,  # Use the prepared config file
-        epochs=150,
+        epochs=100,
         imgsz=640
     )
     

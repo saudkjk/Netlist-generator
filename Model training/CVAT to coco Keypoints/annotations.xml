@@ -7,7 +7,7 @@
       <name>Detection</name>
       <bugtracker></bugtracker>
       <created>2024-11-20 14:26:50.978787+00:00</created>
-      <updated>2024-12-11 17:36:09.933641+00:00</updated>
+      <updated>2025-01-29 09:13:31.889768+00:00</updated>
       <tasks>
         <task>
           <id>1056905</id>
@@ -55,6 +55,33 @@
               <start>0</start>
               <stop>19</stop>
               <url>https://app.cvat.ai/api/jobs/1848990</url>
+            </segment>
+          </segments>
+          <owner>
+            <username>saudkjk</username>
+            <email>saudkjk@gmail.com</email>
+          </owner>
+          <assignee></assignee>
+        </task>
+        <task>
+          <id>1169443</id>
+          <name>Voltage_src</name>
+          <size>20</size>
+          <mode>annotation</mode>
+          <overlap>0</overlap>
+          <bugtracker></bugtracker>
+          <created>2025-01-29 09:02:43.845284+00:00</created>
+          <updated>2025-01-29 09:13:31.886360+00:00</updated>
+          <subset>default</subset>
+          <start_frame>0</start_frame>
+          <stop_frame>19</stop_frame>
+          <frame_filter></frame_filter>
+          <segments>
+            <segment>
+              <id>1991967</id>
+              <start>0</start>
+              <stop>19</stop>
+              <url>https://app.cvat.ai/api/jobs/1989489</url>
             </segment>
           </segments>
           <owner>
@@ -129,7 +156,7 @@
         </label>
       </labels>
     </project>
-    <dumped>2024-12-11 17:36:39.914433+00:00</dumped>
+    <dumped>2025-01-30 00:44:32.010602+00:00</dumped>
   </meta>
   <image id="0" name="circuit_0001.jpg" subset="default" task_id="1056905" width="793" height="617">
     <points label="Resistor" source="manual" occluded="0" points="186.39,425.16;292.77,424.56" z_order="0">
@@ -2066,5 +2093,173 @@
     </box>
     <box label="Transistor_MOSFET" source="manual" occluded="0" xtl="216.80" ytl="53.00" xbr="259.83" ybr="87.40" z_order="0">
     </box>
+  </image>
+  <image id="70" name="circuit_0071.jpg" subset="default" task_id="1169443" width="611" height="369">
+    <box label="Voltage_src" source="manual" occluded="0" xtl="453.72" ytl="92.44" xbr="511.40" ybr="142.53" z_order="0">
+    </box>
+    <points label="Voltage_src" source="manual" occluded="0" points="455.10,118.00;509.70,117.90" z_order="0">
+    </points>
+    <box label="GND" source="manual" occluded="0" xtl="392.30" ytl="325.00" xbr="435.00" ybr="353.40" z_order="0">
+    </box>
+    <points label="GND" source="manual" occluded="0" points="413.26,326.96" z_order="0">
+    </points>
+  </image>
+  <image id="71" name="circuit_0072.jpg" subset="default" task_id="1169443" width="776" height="657">
+    <points label="Voltage_src" source="manual" occluded="0" points="374.82,385.90;374.82,498.81" z_order="0">
+    </points>
+    <box label="Voltage_src" source="manual" occluded="0" xtl="322.96" ytl="380.88" xbr="426.26" ybr="504.07" z_order="0">
+    </box>
+  </image>
+  <image id="72" name="circuit_0073.jpg" subset="default" task_id="1169443" width="809" height="678">
+    <box label="Voltage_src" source="manual" occluded="0" xtl="338.67" ytl="394.77" xbr="441.51" ybr="516.19" z_order="0">
+    </box>
+    <points label="Voltage_src" source="manual" occluded="0" points="390.37,397.96;389.91,512.26" z_order="0">
+    </points>
+  </image>
+  <image id="73" name="circuit_0074.jpg" subset="default" task_id="1169443" width="785" height="391">
+    <points label="Voltage_src" source="manual" occluded="0" points="448.61,149.18;449.18,245.68" z_order="0">
+    </points>
+    <box label="Voltage_src" source="manual" occluded="0" xtl="404.38" ytl="146.30" xbr="491.98" ybr="248.72" z_order="0">
+    </box>
+  </image>
+  <image id="74" name="circuit_0075.jpg" subset="default" task_id="1169443" width="772" height="571">
+    <points label="Voltage_src" source="manual" occluded="0" points="302.24,343.37;301.84,497.75" z_order="0">
+    </points>
+    <box label="Voltage_src" source="manual" occluded="0" xtl="229.42" ytl="340.91" xbr="374.80" ybr="504.33" z_order="0">
+    </box>
+  </image>
+  <image id="75" name="circuit_0076.jpg" subset="default" task_id="1169443" width="776" height="427">
+    <points label="Voltage_src" source="manual" occluded="0" points="58.99,164.00;59.30,278.40" z_order="0">
+    </points>
+    <box label="Voltage_src" source="manual" occluded="0" xtl="6.57" ytl="159.98" xbr="112.39" ybr="282.88" z_order="0">
+    </box>
+  </image>
+  <image id="76" name="circuit_0077.jpg" subset="default" task_id="1169443" width="451" height="248">
+    <box label="Voltage_src" source="manual" occluded="0" xtl="55.74" ytl="104.67" xbr="118.39" ybr="179.56" z_order="0">
+    </box>
+    <points label="Voltage_src" source="manual" occluded="0" points="87.70,106.90;87.60,177.10" z_order="0">
+    </points>
+  </image>
+  <image id="77" name="circuit_0078.jpg" subset="default" task_id="1169443" width="781" height="412">
+    <box label="Voltage_src" source="manual" occluded="0" xtl="593.37" ytl="157.92" xbr="704.23" ybr="289.65" z_order="0">
+    </box>
+    <box label="Voltage_src" source="manual" occluded="0" xtl="4.64" ytl="156.84" xbr="114.69" ybr="287.76" z_order="0">
+    </box>
+    <points label="Voltage_src" source="manual" occluded="0" points="59.04,159.99;58.63,285.24" z_order="0">
+    </points>
+    <points label="GND" source="manual" occluded="0" points="59.07,339.88" z_order="0">
+    </points>
+    <box label="GND" source="manual" occluded="0" xtl="13.70" ytl="336.88" xbr="104.07" ybr="408.26" z_order="0">
+    </box>
+    <points label="Voltage_src" source="manual" occluded="0" points="649.30,284.35;648.96,161.72" z_order="0">
+    </points>
+  </image>
+  <image id="78" name="circuit_0079.jpg" subset="default" task_id="1169443" width="508" height="161">
+    <points label="Voltage_src" source="manual" occluded="0" points="175.27,38.71;214.93,39.03" z_order="0">
+    </points>
+    <box label="Voltage_src" source="manual" occluded="0" xtl="174.10" ytl="21.35" xbr="216.86" ybr="56.96" z_order="0">
+    </box>
+  </image>
+  <image id="79" name="circuit_0080.jpg" subset="default" task_id="1169443" width="777" height="410">
+    <points label="Voltage_src" source="manual" occluded="0" points="349.90,198.80;349.69,348.98" z_order="0">
+    </points>
+    <box label="Voltage_src" source="manual" occluded="0" xtl="281.50" ytl="193.10" xbr="421.01" ybr="353.62" z_order="0">
+    </box>
+  </image>
+  <image id="80" name="circuit_0081.jpg" subset="default" task_id="1169443" width="786" height="687">
+    <points label="GND" source="manual" occluded="0" points="582.92,611.61" z_order="0">
+    </points>
+    <box label="Voltage_src" source="manual" occluded="0" xtl="519.12" ytl="395.93" xbr="647.81" ybr="540.31" z_order="0">
+    </box>
+    <points label="Voltage_src" source="manual" occluded="0" points="66.70,537.10;66.75,397.66" z_order="0">
+    </points>
+    <points label="Voltage_src" source="manual" occluded="0" points="583.10,399.10;582.72,535.81" z_order="0">
+    </points>
+    <box label="GND" source="manual" occluded="0" xtl="531.40" ytl="608.89" xbr="634.30" ybr="681.34" z_order="0">
+    </box>
+    <box label="Voltage_src" source="manual" occluded="0" xtl="4.06" ytl="393.89" xbr="129.86" ybr="541.53" z_order="0">
+    </box>
+  </image>
+  <image id="81" name="circuit_0082.jpg" subset="default" task_id="1169443" width="779" height="529">
+    <box label="Voltage_src" source="manual" occluded="0" xtl="287.00" ytl="244.78" xbr="400.11" ybr="376.50" z_order="0">
+    </box>
+    <box label="Voltage_src" source="manual" occluded="0" xtl="593.29" ytl="244.05" xbr="705.82" ybr="376.01" z_order="0">
+    </box>
+    <points label="Voltage_src" source="manual" occluded="0" points="650.47,372.14;650.84,246.82" z_order="0">
+    </points>
+    <points label="Voltage_src" source="manual" occluded="0" points="343.43,371.77;344.17,247.56" z_order="0">
+    </points>
+  </image>
+  <image id="82" name="circuit_0083.jpg" subset="default" task_id="1169443" width="848" height="441">
+    <box label="Voltage_src" source="manual" occluded="0" xtl="27.55" ytl="88.34" xbr="176.62" ybr="261.00" z_order="0">
+    </box>
+    <points label="Voltage_src" source="manual" occluded="0" points="437.90,255.79;437.90,92.09" z_order="0">
+    </points>
+    <points label="Voltage_src" source="manual" occluded="0" points="100.91,257.06;100.91,92.09" z_order="0">
+    </points>
+    <box label="Voltage_src" source="manual" occluded="0" xtl="363.26" ytl="88.05" xbr="511.17" ybr="259.25" z_order="0">
+    </box>
+    <points label="GND" source="manual" occluded="0" points="437.70,339.34" z_order="0">
+    </points>
+    <box label="GND" source="manual" occluded="0" xtl="377.58" ytl="335.99" xbr="498.83" ybr="422.83" z_order="0">
+    </box>
+  </image>
+  <image id="83" name="circuit_0084.jpg" subset="default" task_id="1169443" width="191" height="152">
+    <points label="Voltage_src" source="manual" occluded="0" points="42.54,57.00;42.54,99.40" z_order="0">
+    </points>
+    <box label="Voltage_src" source="manual" occluded="0" xtl="20.91" ytl="55.65" xbr="63.81" ybr="101.15" z_order="0">
+    </box>
+  </image>
+  <image id="84" name="circuit_0085.jpg" subset="default" task_id="1169443" width="801" height="540">
+    <box label="Voltage_src" source="manual" occluded="0" xtl="2.29" ytl="92.74" xbr="113.61" ybr="227.14" z_order="0">
+    </box>
+    <points label="Voltage_src" source="manual" occluded="0" points="334.23,59.49;473.67,59.79" z_order="0">
+    </points>
+    <points label="Voltage_src" source="manual" occluded="0" points="58.90,222.32;58.90,96.79" z_order="0">
+    </points>
+    <box label="Voltage_src" source="manual" occluded="0" xtl="330.91" ytl="5.99" xbr="477.46" ybr="114.64" z_order="0">
+    </box>
+  </image>
+  <image id="85" name="circuit_0086.jpg" subset="default" task_id="1169443" width="777" height="742">
+    <box label="Voltage_src" source="manual" occluded="0" xtl="9.67" ytl="335.41" xbr="90.10" ybr="436.05" z_order="0">
+    </box>
+    <points label="GND" source="manual" occluded="0" points="50.92,687.45" z_order="0">
+    </points>
+    <box label="GND" source="manual" occluded="0" xtl="18.33" ytl="685.09" xbr="84.02" ybr="731.17" z_order="0">
+    </box>
+    <points label="Voltage_src" source="manual" occluded="0" points="50.76,433.15;50.42,338.57" z_order="0">
+    </points>
+  </image>
+  <image id="86" name="circuit_0087.jpg" subset="default" task_id="1169443" width="332" height="180">
+    <points label="Voltage_src" source="manual" occluded="0" points="55.29,116.67;54.94,62.31" z_order="0">
+    </points>
+    <box label="Voltage_src" source="manual" occluded="0" xtl="30.04" ytl="61.10" xbr="79.14" ybr="118.70" z_order="0">
+    </box>
+  </image>
+  <image id="87" name="circuit_0088.jpg" subset="default" task_id="1169443" width="367" height="278">
+    <box label="Voltage_src" source="manual" occluded="0" xtl="267.79" ytl="38.70" xbr="322.11" ybr="107.43" z_order="0">
+    </box>
+    <points label="Voltage_src" source="manual" occluded="0" points="295.88,105.04;295.62,40.77" z_order="0">
+    </points>
+  </image>
+  <image id="88" name="circuit_0089.jpg" subset="default" task_id="1169443" width="638" height="324">
+    <box label="Voltage_src" source="manual" occluded="0" xtl="41.53" ytl="118.39" xbr="112.44" ybr="205.49" z_order="0">
+    </box>
+    <points label="Voltage_src" source="manual" occluded="0" points="77.35,203.31;77.20,121.01" z_order="0">
+    </points>
+  </image>
+  <image id="89" name="circuit_0090.jpg" subset="default" task_id="1169443" width="528" height="397">
+    <box label="Voltage_src" source="manual" occluded="0" xtl="383.69" ytl="15.74" xbr="462.17" ybr="80.07" z_order="0">
+    </box>
+    <points label="GND" source="manual" occluded="0" points="197.54,362.46" z_order="0">
+    </points>
+    <box label="GND" source="manual" occluded="0" xtl="179.51" ytl="360.91" xbr="215.71" ybr="392.21" z_order="0">
+    </box>
+    <points label="Voltage_src" source="manual" occluded="0" points="458.53,47.44;386.53,47.26" z_order="0">
+    </points>
+    <box label="Voltage_src" source="manual" occluded="0" xtl="16.56" ytl="232.83" xbr="79.36" ybr="309.87" z_order="0">
+    </box>
+    <points label="Voltage_src" source="manual" occluded="0" points="47.70,234.49;47.70,307.29" z_order="0">
+    </points>
   </image>
 </annotations>
