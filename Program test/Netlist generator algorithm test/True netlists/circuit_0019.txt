@@ -1,4 +1,0 @@
-Transistor_BJT_9 3 4 2
-Resistor_9 9 3
-Resistor_2 9 2
-Voltage_src_9 9 4
