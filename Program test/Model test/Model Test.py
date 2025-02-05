@@ -5,6 +5,7 @@ from ultralytics import YOLO
 
 # Get the current working directory and define the project root
 current_dir = os.getcwd()
+PARENT_PATH = os.path.dirname(current_dir)  # Parent path is two levels up
 PROJECT_PATH = os.path.dirname(os.path.dirname(current_dir))  # Project path is two levels up
 
 # Function for processing all images
@@ -28,10 +29,10 @@ def process_all_images():
     latest_train_path = os.path.join(pose_folder, latest_train_folder, 'weights', 'last.pt')
 
     # Define the image folder path dynamically
-    image_folder = os.path.join(PROJECT_PATH, 'Program test/Model test/Test images')
+    image_folder = os.path.join(PARENT_PATH, 'Model test/Test images')
 
     # Define the output folder for processed images
-    output_folder = os.path.join(PROJECT_PATH, 'Program test/Model test/Model test results')
+    output_folder = os.path.join(PARENT_PATH, 'Model test/Model test results')
     os.makedirs(output_folder, exist_ok=True)
 
     # Load YOLO model
@@ -86,7 +87,7 @@ def process_single_image():
     root.attributes("-topmost", True)  # Ensure the dialog appears on top
 
     # Define the image folder path dynamically
-    image_folder = os.path.join(PROJECT_PATH, 'Program test/Model test/Test images')
+    image_folder = os.path.join(PARENT_PATH, 'Model test/Test images')
 
     # Let the user select a file
     selected_file = filedialog.askopenfilename(initialdir=image_folder, title="Select an image",
