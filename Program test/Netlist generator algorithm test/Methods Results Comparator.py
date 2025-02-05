@@ -1,7 +1,9 @@
 import os
 from collections import defaultdict, Counter
 from tkinter import Tk, filedialog
-from networkx.algorithms import isomorphism
+import networkx as nx
+import numpy as np
+
 
 class Component:
     def __init__(self, name, nodes):
@@ -156,7 +158,6 @@ def process_the_folder(folder_path):
             netlists[file_name] = read_netlist(file_path)
     return netlists
 
-
 # Count component types connected to each node
 def count_component_types(node_to_components):
     node_component_type_counts = {}
@@ -223,6 +224,129 @@ def check_netlist_equivalence_by_type(true_node_map, generated_node_map, num_fil
         print(f"Number of false generated nodes: {false_generated_nodes}")
 
     return matched_nodes, total_true_nodes
+
+def parse_input(component_list):
+    """
+    Parses a list of Component objects and returns a dictionary {component_type: [neighbors]}.
+    """
+    adjacency_dict = {}
+
+    for component in component_list:
+        if not isinstance(component, Component):
+            print(f"Error: Expected Component object, got {type(component)}")
+            continue
+
+        node_raw = component.name  # Extract component name
+        neighbors = component.nodes  # Extract list of connected nodes
+
+        # Ensure it's a list (handles cases where nodes are not in list format)
+        if isinstance(neighbors, int):
+            neighbors = [neighbors]
+
+        # Extract base component name (ignore number after last '_')
+        if "_" in node_raw:
+            node = "_".join(node_raw.split("_")[:-1])  # Remove last part after '_'
+        else:
+            node = node_raw  # If no underscore, keep as is
+
+        # Store in adjacency dictionary
+        if node not in adjacency_dict:
+            adjacency_dict[node] = []
+        adjacency_dict[node].extend(neighbors)
+
+    return adjacency_dict
+
+def check_isomorphism(input1, input2):
+    """
+    Checks if two netlists are isomorphic.
+    :param input1: List of Component objects for Graph 1 (True Netlist)
+    :param input2: List of Component objects for Graph 2 (Generated Netlist)
+    :return: Boolean (True if isomorphic, False otherwise)
+    """
+    G1 = nx.Graph()
+    G2 = nx.Graph()
+
+    # Parse inputs into adjacency lists
+    adj_dict1 = parse_input(input1)
+    adj_dict2 = parse_input(input2)
+
+    # Add edges to Graph 1
+    for node, neighbors in adj_dict1.items():
+        for neighbor in neighbors:
+            G1.add_edge(str(node), str(neighbor))
+
+    # Add edges to Graph 2
+    for node, neighbors in adj_dict2.items():
+        for neighbor in neighbors:
+            G2.add_edge(str(node), str(neighbor))
+
+    # Check isomorphism
+    return nx.is_isomorphic(G1, G2)
+
+def spectral_similarity_fixed(G1, G2):
+    A1 = nx.adjacency_matrix(G1).todense()
+    A2 = nx.adjacency_matrix(G2).todense()
+
+    # Compute eigenvalues and convert to numpy arrays
+    eig1 = np.sort(np.linalg.eigvals(A1))
+    eig2 = np.sort(np.linalg.eigvals(A2))
+
+    # Pad the shorter eigenvalue list with zeros to match the lengths
+    max_length = max(len(eig1), len(eig2))
+    eig1 = np.pad(eig1, (0, max_length - len(eig1)), mode='constant')
+    eig2 = np.pad(eig2, (0, max_length - len(eig2)), mode='constant')
+
+    # Compute Euclidean distance between eigenvalues
+    return np.linalg.norm(eig1 - eig2)
+
+def explain_graph_differences(input1, input2):
+    """
+    Uses only Graph Edit Distance (GED) and Spectral Similarity to explain why two graphs 
+    are not isomorphic and what needs to be changed to make them isomorphic.
+    """
+
+    G1 = nx.Graph()
+    G2 = nx.Graph()
+
+    # Parse inputs into adjacency lists
+    adj_dict1 = parse_input(input1)
+    adj_dict2 = parse_input(input2)
+
+    # Add edges to Graph 1
+    for node, neighbors in adj_dict1.items():
+        for neighbor in neighbors:
+            G1.add_edge(str(node), str(neighbor))
+
+    # Add edges to Graph 2
+    for node, neighbors in adj_dict2.items():
+        for neighbor in neighbors:
+            G2.add_edge(str(node), str(neighbor))
+    
+    # Compute Graph Edit Distance
+    ged = nx.algorithms.similarity.graph_edit_distance(G1, G2)
+    
+    # Compute Spectral Similarity
+    spectral_sim = spectral_similarity_fixed(G1, G2)
+
+    # Generate an explanation
+    explanation = f"**Graph Analysis:**\n"
+    explanation += f"- **Graph Edit Distance (GED):** {ged:.1f} changes needed.\n"
+    explanation += f"- **Spectral Similarity Score:** {spectral_sim:.2f} (Lower means more similar).\n"
+
+    # Combined Interpretation
+    severity_score = (ged / 3) + (spectral_sim / 5)  # Normalize both metrics
+
+    if severity_score < 0.01:
+        explanation += "✅ The graphs are already isomorphic! No changes are needed.\n"
+    elif severity_score < 0.5:
+        explanation += "🔄 **The graphs are very close to being isomorphic!** Only small modifications are needed.\n"
+    elif severity_score < 1.5:
+        explanation += "⚠️ **The graphs have some structural differences but share a similar shape.** Moderate changes are needed.\n"
+    else:
+        explanation += "❌ **The graphs are structurally quite different.** Significant modifications are required to make them isomorphic.\n"
+
+    return explanation
+
 
 # Process a folder and calculate overall metrics
 def process_folder(folder_path, true_netlist_dir, verbose=True):
@@ -395,6 +519,59 @@ def test_method_on_one_netlist(test_netlists_path):
     print(f"Total Nodes in all True Netlists: {total_true_nodes}")
     print(f"Total False Nodes Generated: {false_nodes_generated}\n")
 
+# Function 4: Compare all netlists in Method 2 Test results with true netlists
+def compare_all_netlists_in_method_2():
+    current_dir = os.getcwd()
+    method_2_netlist_path = os.path.join(current_dir, 'Method 2/Test results/')
+    true_netlist_dir = os.path.join(current_dir, 'True netlists/')
+    true_netlist_files = process_the_folder(true_netlist_dir)
+    test_netlist_files = process_the_folder(method_2_netlist_path)
+
+    # Compare netlists file by file
+    missing_files = set()
+    for file_name in test_netlist_files:
+        if file_name in true_netlist_files:
+            true_netlist = true_netlist_files[file_name]
+            test_netlist = test_netlist_files[file_name]
+            print(true_netlist)
+            print(test_netlist)
+            result = compare_netlists(true_netlist, test_netlist)
+            print(f"Match Result for {file_name}: {result}\n")
+        else:
+            missing_files.add(file_name)
+    
+    for file_name in missing_files:
+        print(f"\nTrue netlist file missing for {file_name}\n")
+
+# Function 5: Compare all images using Graph Theory
+def compare_all_images_using_graph_theory():
+    current_dir = os.getcwd()
+    method_2_netlist_path = os.path.join(current_dir, 'Method 2/Test results/')
+    true_netlist_dir = os.path.join(current_dir, 'True netlists/')
+    true_netlist_files = process_the_folder(true_netlist_dir)
+    test_netlist_files = process_the_folder(method_2_netlist_path)
+
+    missing_files = set()
+    for file_name in test_netlist_files:
+        if file_name in true_netlist_files:
+            true_netlist = true_netlist_files[file_name]
+            test_netlist = test_netlist_files[file_name]
+            print(true_netlist)
+            print(test_netlist)
+            # Check isomorphism
+            isomorphic = check_isomorphism(true_netlist, test_netlist)
+            print(f"Comparison for {file_name}:")
+            print(f"Isomorphic: {isomorphic}\n")
+            if not isomorphic:
+                print(explain_graph_differences(true_netlist, test_netlist))
+        else:
+            missing_files.add(file_name)
+
+    for file_name in missing_files:
+        print(f"\nTrue netlist file missing for {file_name}\n")
+
+
+
 # Main Function
 def main():
     # Function to get the method choice from the user
@@ -418,8 +595,9 @@ def main():
     print("1. Compare Methods")
     print("2. Test Method on All Netlists")
     print("3. Test Method on One Netlist")
-    print("4. Compare all netlists in Method 2 Test results with true netlists")
-    choice = input("Enter your choice (1/2/3/4): ")
+    # print("4. Compare all netlists in Method 2 Test results with true netlists")
+    print("5. Compare all images using Graph Theory")
+    choice = input("Enter your choice (1/2/3/4/5): ")
 
     if choice == '1':
         compare_methods()
@@ -427,32 +605,12 @@ def main():
         test_method_on_all_netlists(get_method_choice())
     elif choice == '3':
         test_method_on_one_netlist(get_method_choice())
-    elif choice == '4':
-        current_dir = os.getcwd()
-        method_2_netlist_path = os.path.join(current_dir, 'Method 2/Test results/')
-        true_netlist_dir = os.path.join(current_dir, 'True netlists/')
-        true_netlist_files = process_the_folder(true_netlist_dir)
-        test_netlist_files = process_the_folder(method_2_netlist_path)
-
-        # Compare netlists file by file
-        missing_files = set()
-        for file_name in test_netlist_files:
-            if file_name in true_netlist_files:
-                print(f"\nComparing: {file_name}\n")
-                true_netlist = true_netlist_files[file_name]
-                test_netlist = test_netlist_files[file_name]
-                print(f"True Netlist: {true_netlist}")
-                print(f"Test Netlist: {test_netlist}")
-                result = compare_netlists(true_netlist, test_netlist)
-                print(f"\nMatch Result for {file_name}: {result}\n")
-            else:
-                missing_files.add(file_name)
-        
-        for file_name in missing_files:
-            print(f"\nTrue netlist file missing for {file_name}\n")
-
+    # elif choice == '4':
+    #     compare_all_netlists_in_method_2()
+    elif choice == '5':
+        compare_all_images_using_graph_theory()
     else:
-        print("Invalid choice. Please select 1, 2, 3, or 4.")
+        print("Invalid choice. Please select 1, 2, 3, 4, or 5.")
 
 if __name__ == "__main__":
     main()
