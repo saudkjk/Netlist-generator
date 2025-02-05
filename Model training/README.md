@@ -78,7 +78,6 @@ env_netlist\Scripts\activate
 
 **Note:** You’ll know the environment is activated when you see the environment name in parentheses before the command prompt:
 
-```lua
 (env_netlist) C:\your\path\here>
 ````
 
