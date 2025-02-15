@@ -16,7 +16,7 @@ val: images/val # val images (relative to 'path')
 """
     # Static sections of the config
     static_section = """\n# Keypoints
-kpt_shape: [3, 3] # [number of keypoints, number of dim]
+kpt_shape: [5, 3] # [number of keypoints, number of dim]
 
 # Classes
 names:
@@ -28,6 +28,8 @@ names:
     5: Voltage_src
     6: Current_src
     7: GND
+    8: Op-Amp_v1
+    9: Op-Amp_v2
 """
 
     # Combine both sections
