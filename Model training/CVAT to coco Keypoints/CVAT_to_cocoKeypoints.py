@@ -10,9 +10,9 @@ if not os.path.exists(out_dir):
 file = minidom.parse('annotations.xml')
 
 # Fixed label mapping for resistor and transistor
-
-label_mapping = { "Resistor": 0, "Capacitor": 1, "Inductor": 2, "Transistor_BJT": 3, "Transistor_MOSFET": 4, "Voltage_src": 5, "Current_src": 6, "GND": 7}
-label_counter = 7
+label_mapping = { "Resistor": 0, "Capacitor": 1, "Inductor": 2, "Transistor_BJT": 3, "Transistor_MOSFET": 4, "Voltage_src": 5, "Current_src": 6, "GND": 7, "Op-Amp_v1": 8, "Op-Amp_v2": 9 }
+# print("number of labels:", len(label_mapping))
+label_counter = len(label_mapping) - 1
 
 # Processing each image
 images = file.getElementsByTagName('image')
@@ -75,14 +75,15 @@ for image in images:
                             norm_p2 = p2 / height
                             matched_points.append((norm_p1, norm_p2, 1))  # 1 = visible
 
-            # Add dummy points if there are fewer than 3 keypoints
-            while len(matched_points) < 3:
+            # Workaround for missing points
+            # Add dummy points if there are fewer than 5 keypoints
+            while len(matched_points) < 5:
                 matched_points.append((0.0, 0.0, 0))  # Dummy point with visibility 0
             
             # Write keypoints data
-            for i, (norm_p1, norm_p2, visibility) in enumerate(matched_points[:3]):  # Ensure only 3 keypoints
+            for i, (norm_p1, norm_p2, visibility) in enumerate(matched_points[:5]):  # Ensure only 5 keypoints
                 label_file.write(f"{norm_p1} {norm_p2} {visibility}")
-                if i < len(matched_points[:3]) - 1:
+                if i < len(matched_points[:5]) - 1:
                     label_file.write(" ")
                 else:
                     label_file.write("\n")  # New line for the next bbox

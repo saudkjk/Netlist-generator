@@ -7,7 +7,7 @@
       <name>Detection</name>
       <bugtracker></bugtracker>
       <created>2024-11-20 14:26:50.978787+00:00</created>
-      <updated>2025-01-29 09:13:31.889768+00:00</updated>
+      <updated>2025-02-14 07:15:24.817575+00:00</updated>
       <tasks>
         <task>
           <id>1056905</id>
@@ -17,7 +17,7 @@
           <overlap>0</overlap>
           <bugtracker></bugtracker>
           <created>2024-11-27 15:39:11.824149+00:00</created>
-          <updated>2024-12-11 17:36:09.931048+00:00</updated>
+          <updated>2025-02-14 06:52:15.117865+00:00</updated>
           <subset>default</subset>
           <start_frame>0</start_frame>
           <stop_frame>49</stop_frame>
@@ -44,7 +44,7 @@
           <overlap>0</overlap>
           <bugtracker></bugtracker>
           <created>2024-12-04 19:19:41.365367+00:00</created>
-          <updated>2024-12-11 17:23:07.614335+00:00</updated>
+          <updated>2025-02-14 06:52:15.117865+00:00</updated>
           <subset>default</subset>
           <start_frame>0</start_frame>
           <stop_frame>19</stop_frame>
@@ -71,7 +71,7 @@
           <overlap>0</overlap>
           <bugtracker></bugtracker>
           <created>2025-01-29 09:02:43.845284+00:00</created>
-          <updated>2025-01-29 09:13:31.886360+00:00</updated>
+          <updated>2025-02-14 06:52:15.117865+00:00</updated>
           <subset>default</subset>
           <start_frame>0</start_frame>
           <stop_frame>19</stop_frame>
@@ -82,6 +82,33 @@
               <start>0</start>
               <stop>19</stop>
               <url>https://app.cvat.ai/api/jobs/1989489</url>
+            </segment>
+          </segments>
+          <owner>
+            <username>saudkjk</username>
+            <email>saudkjk@gmail.com</email>
+          </owner>
+          <assignee></assignee>
+        </task>
+        <task>
+          <id>1201467</id>
+          <name>Op-amp</name>
+          <size>30</size>
+          <mode>annotation</mode>
+          <overlap>0</overlap>
+          <bugtracker></bugtracker>
+          <created>2025-02-14 06:50:55.180460+00:00</created>
+          <updated>2025-02-14 07:15:24.815178+00:00</updated>
+          <subset>default</subset>
+          <start_frame>0</start_frame>
+          <stop_frame>29</stop_frame>
+          <frame_filter></frame_filter>
+          <segments>
+            <segment>
+              <id>2045214</id>
+              <start>0</start>
+              <stop>29</stop>
+              <url>https://app.cvat.ai/api/jobs/2042775</url>
             </segment>
           </segments>
           <owner>
@@ -154,9 +181,23 @@
           <attributes>
           </attributes>
         </label>
+        <label>
+          <name>Op-Amp_v1</name>
+          <color>#677221</color>
+          <type>any</type>
+          <attributes>
+          </attributes>
+        </label>
+        <label>
+          <name>Op-Amp_v2</name>
+          <color>#367149</color>
+          <type>any</type>
+          <attributes>
+          </attributes>
+        </label>
       </labels>
     </project>
-    <dumped>2025-01-30 00:44:32.010602+00:00</dumped>
+    <dumped>2025-02-14 07:28:07.564520+00:00</dumped>
   </meta>
   <image id="0" name="circuit_0001.jpg" subset="default" task_id="1056905" width="793" height="617">
     <points label="Resistor" source="manual" occluded="0" points="186.39,425.16;292.77,424.56" z_order="0">
@@ -2260,6 +2301,270 @@
     <box label="Voltage_src" source="manual" occluded="0" xtl="16.56" ytl="232.83" xbr="79.36" ybr="309.87" z_order="0">
     </box>
     <points label="Voltage_src" source="manual" occluded="0" points="47.70,234.49;47.70,307.29" z_order="0">
+    </points>
+  </image>
+  <image id="90" name="circuit_0091.jpg" subset="default" task_id="1201467" width="1433" height="758">
+    <points label="Op-Amp_v1" source="manual" occluded="0" points="816.77,424.34;668.53,398.19;668.53,450.25" z_order="0">
+    </points>
+    <box label="Op-Amp_v1" source="manual" occluded="0" xtl="666.25" ytl="363.90" xbr="820.04" ybr="484.07" z_order="0">
+    </box>
+  </image>
+  <image id="91" name="circuit_0092.jpg" subset="default" task_id="1201467" width="1020" height="1022">
+    <box label="Op-Amp_v1" source="manual" occluded="0" xtl="665.57" ytl="133.33" xbr="753.94" ybr="210.94" z_order="0">
+    </box>
+    <points label="Op-Amp_v1" source="manual" occluded="0" points="751.59,172.47;667.37,157.65;667.59,188.87" z_order="0">
+    </points>
+    <points label="Op-Amp_v1" source="manual" occluded="0" points="481.79,433.81;400.26,417.64;400.48,450.21" z_order="0">
+    </points>
+    <box label="Op-Amp_v1" source="manual" occluded="0" xtl="394.21" ytl="119.17" xbr="483.10" ybr="196.21" z_order="0">
+    </box>
+    <points label="Op-Amp_v1" source="manual" occluded="0" points="479.93,157.80;396.91,141.90;396.91,173.70" z_order="0">
+    </points>
+    <box label="Op-Amp_v1" source="manual" occluded="0" xtl="398.17" ytl="396.19" xbr="484.28" ybr="471.54" z_order="0">
+    </box>
+  </image>
+  <image id="92" name="circuit_0093.jpg" subset="default" task_id="1201467" width="480" height="360">
+    <box label="Op-Amp_v1" source="manual" occluded="0" xtl="75.79" ytl="190.30" xbr="134.82" ybr="240.19" z_order="0">
+    </box>
+    <points label="Op-Amp_v1" source="manual" occluded="0" points="383.30,193.50;326.42,182.34;326.06,203.94" z_order="0">
+    </points>
+    <points label="Op-Amp_v1" source="manual" occluded="0" points="133.64,214.72;76.64,203.92;76.84,225.52" z_order="0">
+    </points>
+    <points label="Op-Amp_v1" source="manual" occluded="0" points="256.61,204.04;201.21,193.43;201.51,215.13" z_order="0">
+    </points>
+    <box label="Op-Amp_v1" source="manual" occluded="0" xtl="324.99" ytl="168.02" xbr="384.58" ybr="219.15" z_order="0">
+    </box>
+    <box label="Op-Amp_v1" source="manual" occluded="0" xtl="200.34" ytl="179.32" xbr="257.55" ybr="230.38" z_order="0">
+    </box>
+  </image>
+  <image id="93" name="circuit_0094.jpg" subset="default" task_id="1201467" width="435" height="395">
+    <points label="Op-Amp_v2" source="manual" occluded="0" points="137.96,66.35;101.56,37.43;57.88,50.98;57.88,80.31;102.37,96.69" z_order="0">
+    </points>
+    <box label="Op-Amp_v2" source="manual" occluded="0" xtl="55.80" ytl="35.60" xbr="140.00" ybr="98.88" z_order="0">
+    </box>
+  </image>
+  <image id="94" name="circuit_0095.jpg" subset="default" task_id="1201467" width="541" height="202">
+    <box label="Op-Amp_v1" source="manual" occluded="0" xtl="349.28" ytl="31.15" xbr="528.42" ybr="168.62" z_order="0">
+    </box>
+    <box label="Op-Amp_v2" source="manual" occluded="0" xtl="14.50" ytl="34.00" xbr="184.53" ybr="168.41" z_order="0">
+    </box>
+    <points label="Op-Amp_v2" source="manual" occluded="0" points="181.90,101.50;69.50,38.50;16.83,69.41;16.83,131.47;69.29,166.13" z_order="0">
+    </points>
+    <points label="Op-Amp_v1" source="manual" occluded="0" points="525.26,100.95;351.72,69.10;351.25,131.63" z_order="0">
+    </points>
+  </image>
+  <image id="95" name="circuit_0096.jpg" subset="default" task_id="1201467" width="1280" height="720">
+    <box label="Op-Amp_v1" source="manual" occluded="0" xtl="534.02" ytl="356.63" xbr="691.11" ybr="489.77" z_order="0">
+    </box>
+    <box label="Op-Amp_v1" source="manual" occluded="0" xtl="202.13" ytl="388.72" xbr="358.26" ybr="521.86" z_order="0">
+    </box>
+    <points label="Op-Amp_v1" source="manual" occluded="0" points="687.55,423.55;536.87,395.21;536.87,452.92" z_order="0">
+    </points>
+    <points label="Op-Amp_v1" source="manual" occluded="0" points="1020.02,394.52;867.96,365.83;869.34,423.89" z_order="0">
+    </points>
+    <points label="Op-Amp_v1" source="manual" occluded="0" points="354.39,452.93;205.44,423.55;205.79,481.61" z_order="0">
+    </points>
+    <box label="Op-Amp_v1" source="manual" occluded="0" xtl="865.44" ytl="328.37" xbr="1023.49" ybr="461.51" z_order="0">
+    </box>
+  </image>
+  <image id="96" name="circuit_0097.jpg" subset="default" task_id="1201467" width="1651" height="2043">
+    <box label="Op-Amp_v2" source="manual" occluded="0" xtl="71.10" ytl="1252.75" xbr="231.39" ybr="1375.38" z_order="0">
+    </box>
+    <points label="Op-Amp_v1" source="manual" occluded="0" points="489.06,1313.65;328.27,1284.46;328.73,1341.93" z_order="0">
+    </points>
+    <box label="Op-Amp_v1" source="manual" occluded="0" xtl="326.37" ytl="1250.70" xbr="491.35" ybr="1378.13" z_order="0">
+    </box>
+    <points label="Op-Amp_v2" source="manual" occluded="0" points="229.11,1313.83;123.74,1254.76;73.11,1285.32;73.11,1341.88;123.97,1372.44" z_order="0">
+    </points>
+  </image>
+  <image id="97" name="circuit_0098.jpg" subset="default" task_id="1201467" width="450" height="316">
+    <points label="Op-Amp_v1" source="manual" occluded="0" points="367.06,232.73;283.70,221.65;283.70,244.40" z_order="0">
+    </points>
+    <box label="Op-Amp_v1" source="manual" occluded="0" xtl="282.02" ytl="199.58" xbr="368.83" ybr="267.24" z_order="0">
+    </box>
+  </image>
+  <image id="98" name="circuit_0099.jpg" subset="default" task_id="1201467" width="600" height="283">
+    <points label="Op-Amp_v1" source="manual" occluded="0" points="353.50,143.95;266.92,131.50;266.92,158.20" z_order="0">
+    </points>
+    <box label="Op-Amp_v1" source="manual" occluded="0" xtl="265.00" ytl="109.24" xbr="355.28" ybr="178.83" z_order="0">
+    </box>
+    <box label="Op-Amp_v1" source="manual" occluded="0" xtl="156.42" ytl="122.10" xbr="244.61" ybr="195.33" z_order="0">
+    </box>
+    <points label="Op-Amp_v1" source="manual" occluded="0" points="243.12,157.66;158.52,141.60;158.34,173.17" z_order="0">
+    </points>
+  </image>
+  <image id="99" name="circuit_0100.jpg" subset="default" task_id="1201467" width="798" height="728">
+    <box label="Op-Amp_v1" source="manual" occluded="0" xtl="354.60" ytl="242.68" xbr="649.57" ybr="497.90" z_order="0">
+    </box>
+    <points label="Op-Amp_v1" source="manual" occluded="0" points="644.89,372.75;358.07,293.08;359.33,439.84" z_order="0">
+    </points>
+  </image>
+  <image id="100" name="circuit_0101.jpg" subset="default" task_id="1201467" width="1728" height="1087">
+    <points label="Op-Amp_v1" source="manual" occluded="0" points="613.95,739.29;834.28,687.95;832.46,786.88" z_order="0">
+    </points>
+    <box label="Op-Amp_v1" source="manual" occluded="0" xtl="609.45" ytl="644.45" xbr="839.38" ybr="829.55" z_order="0">
+    </box>
+  </image>
+  <image id="101" name="circuit_0102.jpg" subset="default" task_id="1201467" width="1578" height="754">
+    <points label="Op-Amp_v1" source="manual" occluded="0" points="1417.06,407.23;1246.10,367.70;1246.10,444.12" z_order="0">
+    </points>
+    <box label="Op-Amp_v1" source="manual" occluded="0" xtl="655.77" ytl="289.45" xbr="831.51" ybr="438.29" z_order="0">
+    </box>
+    <box label="Op-Amp_v1" source="manual" occluded="0" xtl="1242.95" ytl="329.10" xbr="1420.23" ybr="484.31" z_order="0">
+    </box>
+    <points label="Op-Amp_v1" source="manual" occluded="0" points="828.13,365.26;659.17,325.07;658.80,402.48" z_order="0">
+    </points>
+  </image>
+  <image id="102" name="circuit_0103.jpg" subset="default" task_id="1201467" width="1218" height="1040">
+    <box label="Op-Amp_v1" source="manual" occluded="0" xtl="261.89" ytl="562.14" xbr="452.13" ybr="714.91" z_order="0">
+    </box>
+    <box label="Op-Amp_v1" source="manual" occluded="0" xtl="694.83" ytl="524.62" xbr="882.67" ybr="673.07" z_order="0">
+    </box>
+    <box label="Op-Amp_v1" source="manual" occluded="0" xtl="473.96" ytl="173.09" xbr="664.20" ybr="324.70" z_order="0">
+    </box>
+    <points label="Op-Amp_v1" source="manual" occluded="0" points="659.48,249.84;478.14,209.91;478.14,286.03" z_order="0">
+    </points>
+    <points label="Op-Amp_v1" source="manual" occluded="0" points="698.00,597.76;879.13,558.76;879.71,637.62" z_order="0">
+    </points>
+    <points label="Op-Amp_v1" source="manual" occluded="0" points="264.58,636.18;449.18,598.04;449.18,676.04" z_order="0">
+    </points>
+  </image>
+  <image id="103" name="circuit_0104.jpg" subset="default" task_id="1201467" width="1517" height="552">
+    <points label="Op-Amp_v1" source="manual" occluded="0" points="885.19,275.63;700.87,238.58;700.87,317.11" z_order="0">
+    </points>
+    <box label="Op-Amp_v1" source="manual" occluded="0" xtl="282.77" ytl="161.12" xbr="478.94" ybr="322.18" z_order="0">
+    </box>
+    <box label="Op-Amp_v1" source="manual" occluded="0" xtl="698.15" ytl="197.11" xbr="888.18" ybr="354.22" z_order="0">
+    </box>
+    <points label="Op-Amp_v1" source="manual" occluded="0" points="475.74,239.97;285.10,199.75;285.73,279.56" z_order="0">
+    </points>
+  </image>
+  <image id="104" name="circuit_0105.jpg" subset="default" task_id="1201467" width="500" height="412">
+    <box label="Op-Amp_v1" source="manual" occluded="0" xtl="379.05" ytl="290.35" xbr="448.14" ybr="345.73" z_order="0">
+    </box>
+    <box label="Op-Amp_v1" source="manual" occluded="0" xtl="208.61" ytl="184.00" xbr="276.21" ybr="241.14" z_order="0">
+    </box>
+    <box label="Op-Amp_v1" source="manual" occluded="0" xtl="209.29" ytl="288.82" xbr="277.80" ybr="348.39" z_order="0">
+    </box>
+    <box label="Op-Amp_v1" source="manual" occluded="0" xtl="378.48" ytl="182.82" xbr="443.57" ybr="240.67" z_order="0">
+    </box>
+    <points label="Op-Amp_v1" source="manual" occluded="0" points="274.12,211.94;209.84,201.46;210.44,221.83" z_order="0">
+    </points>
+    <points label="Op-Amp_v1" source="manual" occluded="0" points="442.01,211.94;380.31,201.66;380.51,221.83" z_order="0">
+    </points>
+    <points label="Op-Amp_v1" source="manual" occluded="0" points="446.17,317.54;380.51,307.66;380.91,327.63" z_order="0">
+    </points>
+    <points label="Op-Amp_v1" source="manual" occluded="0" points="275.70,317.35;211.23,307.66;211.23,327.63" z_order="0">
+    </points>
+  </image>
+  <image id="105" name="circuit_0106.jpg" subset="default" task_id="1201467" width="1108" height="1108">
+  </image>
+  <image id="106" name="circuit_0107.jpg" subset="default" task_id="1201467" width="600" height="307">
+    <points label="Op-Amp_v2" source="manual" occluded="0" points="321.85,184.14;301.56,165.86;274.75,176.50;275.00,192.03;301.56,202.43" z_order="0">
+    </points>
+    <points label="Op-Amp_v2" source="manual" occluded="0" points="182.80,192.00;163.15,174.75;136.22,184.02;136.09,200.55;162.77,210.32" z_order="0">
+    </points>
+    <box label="Op-Amp_v2" source="manual" occluded="0" xtl="135.03" ytl="173.43" xbr="184.40" ybr="211.62" z_order="0">
+    </box>
+    <box label="Op-Amp_v2" source="manual" occluded="0" xtl="273.63" ytl="164.61" xbr="323.10" ybr="203.67" z_order="0">
+    </box>
+  </image>
+  <image id="107" name="circuit_0108.jpg" subset="default" task_id="1201467" width="1457" height="925">
+    <points label="Op-Amp_v2" source="manual" occluded="0" points="466.40,307.14;320.32,212.57;232.41,268.51;231.97,344.88;320.32,399.93" z_order="0">
+    </points>
+    <box label="Op-Amp_v1" source="manual" occluded="0" xtl="248.68" ytl="647.31" xbr="466.18" ybr="812.96" z_order="0">
+    </box>
+    <box label="Op-Amp_v2" source="manual" occluded="0" xtl="227.87" ytl="209.41" xbr="471.42" ybr="404.77" z_order="0">
+    </box>
+    <points label="Op-Amp_v1" source="manual" occluded="0" points="462.26,729.80;251.73,691.32;252.10,768.28" z_order="0">
+    </points>
+  </image>
+  <image id="108" name="circuit_0109.jpg" subset="default" task_id="1201467" width="448" height="336">
+    <points label="Op-Amp_v2" source="manual" occluded="0" points="366.42,104.56;323.01,80.10;293.71,94.21;293.98,118.13;327.31,132.24" z_order="0">
+    </points>
+    <box label="Op-Amp_v2" source="manual" occluded="0" xtl="292.71" ytl="78.82" xbr="368.03" ybr="133.35" z_order="0">
+    </box>
+  </image>
+  <image id="109" name="circuit_0110.jpg" subset="default" task_id="1201467" width="1176" height="373">
+    <points label="Op-Amp_v2" source="manual" occluded="0" points="1125.80,206.04;1076.36,169.56;1012.25,188.31;1012.08,223.43;1077.21,245.08" z_order="0">
+    </points>
+    <box label="Op-Amp_v2" source="manual" occluded="0" xtl="1010.50" ytl="167.70" xbr="1127.87" ybr="246.93" z_order="0">
+    </box>
+    <box label="Op-Amp_v2" source="manual" occluded="0" xtl="635.83" ytl="167.20" xbr="750.14" ybr="246.00" z_order="0">
+    </box>
+    <points label="Op-Amp_v2" source="manual" occluded="0" points="748.59,206.33;700.28,168.54;637.34,188.71;637.34,223.52;700.42,244.55" z_order="0">
+    </points>
+  </image>
+  <image id="110" name="circuit_0111.jpg" subset="default" task_id="1201467" width="800" height="518">
+    <box label="Op-Amp_v2" source="manual" occluded="0" xtl="327.29" ytl="53.03" xbr="404.34" ybr="127.45" z_order="0">
+    </box>
+    <box label="Op-Amp_v1" source="manual" occluded="0" xtl="701.26" ytl="69.94" xbr="774.21" ybr="144.03" z_order="0">
+    </box>
+    <points label="Op-Amp_v2" source="manual" occluded="0" points="403.05,91.02;364.08,54.09;328.47,74.47;328.47,106.96;363.96,126.03" z_order="0">
+    </points>
+    <points label="Op-Amp_v1" source="manual" occluded="0" points="772.41,107.12;702.99,90.55;703.17,122.66" z_order="0">
+    </points>
+  </image>
+  <image id="111" name="circuit_0112.jpg" subset="default" task_id="1201467" width="1280" height="720">
+    <box label="Op-Amp_v2" source="manual" occluded="0" xtl="855.27" ytl="443.44" xbr="956.43" ybr="533.80" z_order="0">
+    </box>
+    <points label="Op-Amp_v2" source="manual" occluded="0" points="954.72,487.57;903.38,444.57;856.88,470.57;857.05,508.40;903.88,531.73" z_order="0">
+    </points>
+  </image>
+  <image id="112" name="circuit_0113.jpg" subset="default" task_id="1201467" width="736" height="835">
+    <box label="Op-Amp_v2" source="manual" occluded="0" xtl="514.68" ytl="357.60" xbr="596.15" ybr="423.90" z_order="0">
+    </box>
+    <box label="Op-Amp_v2" source="manual" occluded="0" xtl="142.30" ytl="370.09" xbr="223.21" ybr="434.26" z_order="0">
+    </box>
+    <points label="Op-Amp_v2" source="manual" occluded="0" points="221.71,402.19;173.71,371.10;143.91,390.43;144.07,414.11;174.03,432.31" z_order="0">
+    </points>
+    <points label="Op-Amp_v2" source="manual" occluded="0" points="594.61,390.17;545.48,358.60;516.33,378.25;516.33,401.93;545.96,422.55" z_order="0">
+    </points>
+  </image>
+  <image id="113" name="circuit_0114.jpg" subset="default" task_id="1201467" width="540" height="405">
+    <box label="Op-Amp_v2" source="manual" occluded="0" xtl="197.37" ytl="219.30" xbr="266.77" ybr="276.59" z_order="0">
+    </box>
+    <box label="Op-Amp_v2" source="manual" occluded="0" xtl="389.40" ytl="250.80" xbr="456.90" ybr="307.70" z_order="0">
+    </box>
+    <points label="Op-Amp_v2" source="manual" occluded="0" points="455.60,279.12;426.60,251.82;390.40,268.62;390.40,289.82;426.70,306.82" z_order="0">
+    </points>
+    <points label="Op-Amp_v2" source="manual" occluded="0" points="265.88,247.33;236.08,220.23;198.28,236.93;198.38,257.54;236.08,275.54" z_order="0">
+    </points>
+  </image>
+  <image id="114" name="circuit_0115.jpg" subset="default" task_id="1201467" width="1500" height="876">
+    <points label="Op-Amp_v2" source="manual" occluded="0" points="842.90,353.64;762.16,280.39;666.11,319.63;665.36,386.91;761.79,428.40" z_order="0">
+    </points>
+    <box label="Op-Amp_v2" source="manual" occluded="0" xtl="662.55" ytl="277.92" xbr="846.10" ybr="431.36" z_order="0">
+    </box>
+  </image>
+  <image id="115" name="circuit_0116.jpg" subset="default" task_id="1201467" width="1443" height="683">
+    <box label="Op-Amp_v2" source="manual" occluded="0" xtl="313.67" ytl="120.50" xbr="485.49" ybr="241.20" z_order="0">
+    </box>
+    <box label="Op-Amp_v2" source="manual" occluded="0" xtl="719.33" ytl="230.21" xbr="881.14" ybr="350.44" z_order="0">
+    </box>
+    <points label="Op-Amp_v2" source="manual" occluded="0" points="877.90,289.18;781.18,232.95;723.02,261.86;722.06,315.52;781.50,347.66" z_order="0">
+    </points>
+    <points label="Op-Amp_v2" source="manual" occluded="0" points="481.74,181.54;377.64,123.38;316.26,154.54;317.23,207.88;378.28,238.73" z_order="0">
+    </points>
+  </image>
+  <image id="116" name="circuit_0117.jpg" subset="default" task_id="1201467" width="502" height="398">
+  </image>
+  <image id="117" name="circuit_0118.jpg" subset="default" task_id="1201467" width="1175" height="952">
+    <box label="Op-Amp_v2" source="manual" occluded="0" xtl="649.80" ytl="536.80" xbr="889.92" ybr="723.10" z_order="0">
+    </box>
+    <points label="Op-Amp_v2" source="manual" occluded="0" points="886.17,635.07;772.43,539.62;653.28,570.08;653.62,687.20;769.05,719.02" z_order="0">
+    </points>
+  </image>
+  <image id="118" name="circuit_0119.jpg" subset="default" task_id="1201467" width="877" height="808">
+    <points label="Op-Amp_v2" source="manual" occluded="0" points="595.15,409.30;493.11,314.49;380.03,351.73;380.03,449.98;486.90,491.01" z_order="0">
+    </points>
+    <box label="Op-Amp_v2" source="manual" occluded="0" xtl="376.70" ytl="311.24" xbr="598.68" ybr="494.52" z_order="0">
+    </box>
+  </image>
+  <image id="119" name="circuit_0120.jpg" subset="default" task_id="1201467" width="1762" height="1090">
+    <box label="Op-Amp_v2" source="manual" occluded="0" xtl="391.88" ytl="288.62" xbr="627.52" ybr="476.53" z_order="0">
+    </box>
+    <points label="Op-Amp_v2" source="manual" occluded="0" points="622.62,385.25;518.44,292.24;396.60,322.00;397.06,440.59;515.65,472.68" z_order="0">
     </points>
   </image>
 </annotations>
