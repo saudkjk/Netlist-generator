@@ -4,7 +4,6 @@ import shutil
 # Define directory paths
 base_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.dirname(base_dir)
-# cvat_to_coco_dir = os.path.join(base_dir, 'CVAT to coco Keypoints')
 data_dir = os.path.join(parent_dir, 'data')
 images_dir = os.path.join(data_dir, 'images')
 labels_dir = os.path.join(data_dir, 'labels')
