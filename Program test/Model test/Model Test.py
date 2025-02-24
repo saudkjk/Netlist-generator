@@ -26,7 +26,8 @@ def process_all_images():
             return int(folder_name[5:])
 
     latest_train_folder = max(train_folders, key=extract_suffix)
-    latest_train_path = os.path.join(pose_folder, latest_train_folder, 'weights', 'last.pt')
+    latest_model_path = os.path.join(pose_folder, latest_train_folder, 'weights', 'last.pt')
+    # latest_model_path = os.path.join(pose_folder, latest_train_folder, 'weights', 'best.pt')
 
     # Define the image folder path dynamically
     image_folder = os.path.join(PARENT_PATH, 'Model test/Test images')
@@ -36,8 +37,8 @@ def process_all_images():
     os.makedirs(output_folder, exist_ok=True)
 
     # Load YOLO model
-    print(f"Loading model from: {latest_train_path}")
-    model = YOLO(latest_train_path)
+    print(f"Loading model from: {latest_model_path}")
+    model = YOLO(latest_model_path)
 
     # Get a list of all image files in the folder
     image_files = [f for f in os.listdir(image_folder) if f.lower().endswith(('.jpg', '.jpeg', '.png'))]
