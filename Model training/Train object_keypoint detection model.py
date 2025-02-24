@@ -9,11 +9,12 @@ def main():
     source_path, destination_path = prepare_paths(project_path)
 
     # Step 2: Load and train the YOLO model
-    model = YOLO('yolov8m-pose.pt')
+    model = YOLO('yolo11m-pose.pt')
     model.train(
         data=config_path,  # Use the prepared config file
-        epochs=140,
-        imgsz=640
+        epochs=50,
+        imgsz=640,
+        flipud=0.5
     )
     
     # Step 3: Copy the 'runs' directory (YOLO training output) to the specified destination
@@ -25,3 +26,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+
