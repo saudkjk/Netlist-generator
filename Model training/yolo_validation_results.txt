@@ -1,14 +1,14 @@
 Per-Class mAP@50 Scores:
-Class 0 (Resistor): 0.627
-Class 1 (Capacitor): 0.532
-Class 2 (Inductor): 0.765
-Class 3 (Transistor_BJT): 0.635
-Class 4 (Transistor_MOSFET): 0.759
-Class 5 (Voltage_src): 0.648
-Class 6 (Current_src): 0.260
-Class 7 (GND): 0.617
-Class 8 (Op-Amp_v1): 0.574
-Class 9 (Op-Amp_v2): 0.719
+Class 0 (Resistor): 0.554
+Class 1 (Capacitor): 0.613
+Class 2 (Inductor): 0.678
+Class 3 (Transistor_BJT): 0.633
+Class 4 (Transistor_MOSFET): 0.793
+Class 5 (Voltage_src): 0.728
+Class 6 (Current_src): 0.717
+Class 7 (GND): 0.581
+Class 8 (Op-Amp_v1): 0.618
+Class 9 (Op-Amp_v2): 0.695
 
-Underperforming Classes (mAP < 70%): ['Resistor', 'Capacitor', 'Transistor_BJT', 'Voltage_src', 'Current_src', 'GND', 'Op-Amp_v1']
+Underperforming Classes (mAP < 70%): ['Resistor', 'Capacitor', 'Inductor', 'Transistor_BJT', 'GND', 'Op-Amp_v1', 'Op-Amp_v2']
 Well-Performing Classes (mAP > 85%): []
