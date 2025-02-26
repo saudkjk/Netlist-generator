@@ -27,13 +27,12 @@ def process_all_images():
 
     latest_train_folder = max(train_folders, key=extract_suffix)
     latest_model_path = os.path.join(pose_folder, latest_train_folder, 'weights', 'last.pt')
-    # latest_model_path = os.path.join(pose_folder, latest_train_folder, 'weights', 'best.pt')
 
     # Define the image folder path dynamically
     image_folder = os.path.join(PARENT_PATH, 'Model test/Test images')
 
-    # Define the output folder for processed images
-    output_folder = os.path.join(PARENT_PATH, 'Model test/Model test results')
+    # Ensure output folder exists
+    output_folder = os.path.join(current_dir, "Model test results")
     os.makedirs(output_folder, exist_ok=True)
 
     # Load YOLO model
@@ -47,35 +46,16 @@ def process_all_images():
     for image_file in image_files:
         image_path = os.path.join(image_folder, image_file)
 
-        # Load image
-        img = cv2.imread(image_path)
-
         # Run inference
-        results = model(image_path)[0]
+        results = model(image_path, show=True, show_conf=True, conf=0.1)[0]
 
-        # Process each result
-        for result in results:
-            for cls, keypoints, bbox in zip(result.boxes.cls.cpu().numpy(),
-                                             result.keypoints.xy.cpu().numpy(),
-                                             result.boxes.xyxy.cpu().numpy()):
-                class_idx = int(cls)
-                object_name = results.names[class_idx]
-
-                # Extract bounding box coordinates
-                x_min, y_min, x_max, y_max = map(int, bbox)
-
-                # Draw bounding box and keypoints
-                cv2.rectangle(img, (x_min, y_min), (x_max, y_max), (255, 0, 0), 2)
-                cv2.putText(img, object_name, (x_min, y_min),
-                            cv2.FONT_HERSHEY_SIMPLEX, 0.5, (50, 50, 255), 1)
-
-                for keypoint in keypoints:
-                    x, y = int(keypoint[0]), int(keypoint[1])
-                    cv2.circle(img, (x, y), radius=4, color=(0, 255, 0), thickness=-1)
+        # Convert the results image to a format for saving
+        processed_img = results.plot()  # Get image with bounding boxes and keypoints
 
         # Save the processed image to the output folder
         output_image_path = os.path.join(output_folder, image_file)
-        cv2.imwrite(output_image_path, img)
+        cv2.imwrite(output_image_path, processed_img)
+
         print(f"Processed image saved to: {output_image_path}")
 
 # Function for processing a single image with file selection
@@ -122,36 +102,11 @@ def process_single_image():
     print(f"Loading model from: {latest_train_path}")
     model = YOLO(latest_train_path)
 
-    # Load the selected image
-    img = cv2.imread(selected_file)
+    # Run inference and get processed image
+    model(selected_file, show=True, show_conf=True)[0]
 
-    # Run inference
-    results = model(selected_file)[0]
-
-    # Process each result
-    for result in results:
-        keypoints = result.keypoints.xy.cpu().numpy()[0]
-        class_idx = int(result.boxes.cls.cpu().numpy()[0])
-        object_name = results.names[class_idx]
-
-        # Draw bounding box
-        bbox = result.boxes.xyxy.cpu().numpy()[0]
-        x_min, y_min, x_max, y_max = map(int, bbox)
-        cv2.rectangle(img, (x_min, y_min), (x_max, y_max), (255, 0, 0), 2)
-        cv2.putText(img, object_name, (x_min, y_min),
-                    cv2.FONT_HERSHEY_SIMPLEX, 0.5, (50, 50, 255), 1)
-
-        # Draw keypoints
-        for keypoint in keypoints:
-            x, y = int(keypoint[0]), int(keypoint[1])
-            cv2.circle(img, (x, y), radius=4, color=(0, 255, 0), thickness=-1)
-
-    # Display the processed image with the window appearing on top
-    print("Displaying processed image...")
-    cv2.namedWindow("Processed Image", cv2.WINDOW_NORMAL)  # Create a named window
-    cv2.setWindowProperty("Processed Image", cv2.WND_PROP_TOPMOST, 1)  # Set it to always be on top
-    cv2.imshow("Processed Image", img)
-    cv2.waitKey(0)  # Wait for a key press to close the image
+    # Close any open windows
+    cv2.waitKey(0)
     cv2.destroyAllWindows()
 
 # Main function with user selection
