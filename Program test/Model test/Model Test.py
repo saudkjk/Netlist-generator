@@ -47,7 +47,8 @@ def process_all_images():
         image_path = os.path.join(image_folder, image_file)
 
         # Run inference
-        results = model(image_path, show=True, show_conf=True, conf=0.1)[0]
+        # results = model(image_path, show=True, show_conf=True, conf=0.1)[0]
+        results = model(image_path, conf=0.1)[0]
 
         # Convert the results image to a format for saving
         processed_img = results.plot()  # Get image with bounding boxes and keypoints
