@@ -1,0 +1,73 @@
+{
+    "model_path": "C:\\Users\\saudk\\Desktop\\Netlist Generator\\Current trained model/pose\\train\\weights\\last.pt",
+    "timestamp": "20250303_131158",
+    "overall_metrics": {
+        "mAP50": 0.8694101036361129,
+        "mAP50-95": 0.6604564563530658,
+        "precision": 0.8509776546827968,
+        "recall": 0.8303514833906809,
+        "f1": 0.8405380503996267
+    },
+    "class_metrics": {
+        "0": {
+            "mAP50": 0.7341350391278803,
+            "performance_category": "good"
+        },
+        "1": {
+            "mAP50": 0.586128586225592,
+            "performance_category": "needs_improvement"
+        },
+        "2": {
+            "mAP50": 0.8041864754098361,
+            "performance_category": "good"
+        },
+        "3": {
+            "mAP50": 0.9524585135135137,
+            "performance_category": "excellent"
+        },
+        "4": {
+            "mAP50": 0.8817345697204437,
+            "performance_category": "excellent"
+        },
+        "5": {
+            "mAP50": 0.37151638647067226,
+            "performance_category": "poor"
+        },
+        "6": {
+            "mAP50": 0.4991803278688526,
+            "performance_category": "poor"
+        },
+        "7": {
+            "mAP50": 0.8046741615466109,
+            "performance_category": "good"
+        },
+        "8": {
+            "mAP50": 0.7424760476190475,
+            "performance_category": "good"
+        },
+        "9": {
+            "mAP50": 0.8288523333333334,
+            "performance_category": "good"
+        }
+    },
+    "performance_categories": {
+        "poor": [
+            "5",
+            "6"
+        ],
+        "needs_improvement": [
+            "1"
+        ],
+        "good": [
+            "0",
+            "2",
+            "7",
+            "8",
+            "9"
+        ],
+        "excellent": [
+            "3",
+            "4"
+        ]
+    }
+}

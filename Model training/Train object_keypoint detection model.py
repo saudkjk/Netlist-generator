@@ -12,12 +12,11 @@ def main():
     model = YOLO('yolo11m-pose.pt')
     model.train(
         data=config_path,  # Use the prepared config file
-        epochs=100,
+        epochs=150,
         batch=-1,
         warmup_epochs=5,
         device=0,
-        multi_scale=True,  # Improves generalization
-        patience=10,  # Stop training if no improvement for 10 epochs
+        patience=30,  # Stop training if no improvement for 10 epochs
         imgsz=640,
     )
     
@@ -30,6 +29,135 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+# import os
+# import shutil
+# from ultralytics import YOLO
+# from prepare_config import prepare_config_file, prepare_paths
+
+# def main():
+#     # Step 1: Prepare configuration file and paths
+#     config_path, project_path = prepare_config_file()
+#     source_path, destination_path = prepare_paths(project_path)
+
+#     # Step 2: Load and train the YOLO model
+#     model = YOLO('yolo11m-pose.pt')
+#     model.train(
+#         data=config_path,  # Use the prepared config file
+#         epochs=100,
+#         batch=-1,
+#         warmup_epochs=5,
+#         device=0,
+#         patience=15,  # Stop training if no improvement for 10 epochs
+#         imgsz=640,
+#     )
+    
+#     # Step 3: Copy the 'runs' directory (YOLO training output) to the specified destination
+#     if os.path.exists(source_path):
+#         shutil.copytree(source_path, destination_path, dirs_exist_ok=True)
+#         print(f"Training results have been copied to {destination_path}")
+#     else:
+#         print(f"Source path '{source_path}' does not exist. Make sure the training ran successfully.")
+
+# if __name__ == '__main__':
+#     main()
+
+
+# import os
+# import shutil
+# from ultralytics import YOLO
+# from prepare_config import prepare_config_file, prepare_paths
+
+# def main():
+#     # Step 1: Prepare configuration file and paths
+#     config_path, project_path = prepare_config_file()
+#     source_path, destination_path = prepare_paths(project_path)
+
+#     # Step 2: Load and train the YOLO model
+#     model = YOLO('yolo11m-pose.pt')
+
+#     results = model.train(
+#         data=config_path,  # Use the prepared config file
+#         epochs=200,  # Reduce if model converges early
+#         batch=32,  # Increase batch size for faster training
+#         imgsz=512,  # Lower resolution for speed optimization
+#         device=[0,1],  # Multi-GPU training (modify as needed)
+#         optimizer="AdamW",
+#         patience=10,  # Stop training if no improvement
+#         auto_weight=True,  # Balance class losses dynamically
+
+#         # Augmentation improvements
+#         mosaic=0.5,  # Reduce mosaic augmentation
+#         mixup=0.2,  # Lower mixup for stability
+#         copy_paste=0.2,  # Augment rare-class objects
+
+#         # Loss function adjustments for better learning
+#         cls=2.0,  # Higher weight on classification loss
+#         kobj=4.0,  # Objectness loss increased
+#         box=10.0,  # Emphasize bounding box accuracy
+#         dfl=2.0,  # Improve keypoint distribution focal loss
+
+#         # Other efficiency improvements
+#         warmup_epochs=2,  # Faster early training stabilization
+#         cos_lr=False,  # Disable cosine learning rate decay (speed boost)
+#         multi_scale=False,  # Disable multi-scale (improves speed)
+#         save=True,
+#         save_period=20,  # Save model less frequently
+#         pretrained=True  # Use pretrained weights
+#     )
+
+#     # Step 3: Evaluate model on validation data
+#     metrics = model.val()
+#     print(f"Validation Performance:\n"
+#           f"mAP50: {metrics.metrics.mAP50:.4f}\n"
+#           f"mAP50-95: {metrics.metrics.mAP50_95:.4f}\n"
+#           f"Precision: {metrics.metrics.precision:.4f}\n"
+#           f"Recall: {metrics.metrics.recall:.4f}")
+
+#     # Step 4: Copy training results if training was successful
+#     if os.path.exists(source_path):
+#         shutil.copytree(source_path, destination_path, dirs_exist_ok=True)
+#         print(f"Training results have been copied to {destination_path}")
+#     else:
+#         print(f"Source path '{source_path}' does not exist. Make sure the training ran successfully.")
+
+# if __name__ == '__main__':
+#     main()
+
+
+
+# import os
+# import shutil
+# from ultralytics import YOLO
+# from prepare_config import prepare_config_file, prepare_paths
+
+# def main():
+#     # Step 1: Prepare configuration file and paths
+#     config_path, project_path = prepare_config_file()
+#     source_path, destination_path = prepare_paths(project_path)
+
+#     # Step 2: Load and train the YOLO model
+#     model = YOLO('yolo11m-pose.pt')
+#     model.train(
+#         data=config_path,  # Use the prepared config file
+#         epochs=100,
+#         batch=-1,
+#         warmup_epochs=5,
+#         device=0,
+#         multi_scale=True,  # Improves generalization
+#         patience=10,  # Stop training if no improvement for 10 epochs
+#         imgsz=640,
+#     )
+    
+#     # Step 3: Copy the 'runs' directory (YOLO training output) to the specified destination
+#     if os.path.exists(source_path):
+#         shutil.copytree(source_path, destination_path, dirs_exist_ok=True)
+#         print(f"Training results have been copied to {destination_path}")
+#     else:
+#         print(f"Source path '{source_path}' does not exist. Make sure the training ran successfully.")
+
+# if __name__ == '__main__':
+#     main()
 
 
 #    flipud=0.5,  # Occasional upside-down flips is bad since wehn wew have a compoentns upside down with keypoint it will assume
