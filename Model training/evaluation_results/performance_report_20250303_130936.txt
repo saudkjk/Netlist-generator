@@ -1,7 +1,0 @@
-=== MODEL PERFORMANCE REPORT ===
-Model: C:\Users\saudk\Desktop\Netlist Generator\Current trained model/pose\train\weights\best.pt
-Date: 20250303_130936
-
-OVERALL METRICS:
-mAP@50: 0.8761
-mAP@50-95: 0.6791

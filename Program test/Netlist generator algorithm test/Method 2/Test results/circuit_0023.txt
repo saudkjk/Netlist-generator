@@ -1,5 +1,5 @@
-Resistor_1 1 3
 Transistor_BJT_1 4 5
 Transistor_BJT_2 2 3 4
-Transistor_BJT_3 2 4 5
-Resistor_2 1 2
+Transistor_BJT_3 3 4 5
+Resistor_1 1 2
+Resistor_2 1 3

@@ -14,9 +14,9 @@ def main():
         data=config_path,  # Use the prepared config file
         epochs=150,
         batch=-1,
-        warmup_epochs=5,
+        # warmup_epochs=5,
         device=0,
-        patience=30,  # Stop training if no improvement for 10 epochs
+        patience=20,  # Stop training if no improvement for 20 epochs
         imgsz=640,
     )
     

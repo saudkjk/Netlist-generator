@@ -1,9 +1,0 @@
-Transistor_BJT_9 3 4 6
-Resistor_9 6 7
-Resistor_2 9 4
-Resistor_3 9 3
-Resistor_4 2 7
-Resistor_5 4 7
-Capacitor_9 6 7
-Capacitor_2 4 5
-Capacitor_3 2 3
