@@ -21,11 +21,11 @@ def main():
     )
     
     # Step 3: Copy the 'runs' directory (YOLO training output) to the specified destination
-    if os.path.exists(source_path):
-        shutil.copytree(source_path, destination_path, dirs_exist_ok=True)
-        print(f"Training results have been copied to {destination_path}")
-    else:
-        print(f"Source path '{source_path}' does not exist. Make sure the training ran successfully.")
+    # if os.path.exists(source_path):
+    #     shutil.copytree(source_path, destination_path, dirs_exist_ok=True)
+    #     print(f"Training results have been copied to {destination_path}")
+    # else:
+    #     print(f"Source path '{source_path}' does not exist. Make sure the training ran successfully.")
 
 if __name__ == '__main__':
     main()
